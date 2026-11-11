@@ -28,3 +28,13 @@
 ## 发布
 
 仅本目录作为独立 Sites 项目，`.openai/hosting.json` 保留原站点身份和静态目录。保留站点现有访问范围，不修改 App 发布配置。
+
+### GitHub Pages
+
+GitHub 仓库：`https://github.com/batype/jinguan818-brand`。
+
+部署工作流：`.github/workflows/pages.yml`。先在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**，再在 **Actions → Deploy GitHub Pages → Run workflow** 手动发布。
+
+工作流先执行站点校验，再仅上传 `dist/` 的静态文件。分享地址会在临时发布目录中替换为 GitHub Pages 地址，不修改原 Sites 页面或其访问权限，不上传 `.openai/`、Git 元数据与其他源码文件。后续更新也手动运行同一工作流。
+
+当前启用状态：GitHub API 返回 `422: Your current plan does not support GitHub Pages for this repository`。仓库保持私有；需要账号具备私有仓库 Pages 权限，或由所有者确认将宣传站仓库公开后才能启用。部署配置已准备，尚未产生可访问的 Pages 站点。
