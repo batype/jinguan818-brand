@@ -1,8 +1,7 @@
 'use strict'
 ;(() => {
-  document.documentElement.classList.add('js')
   const menuButton = document.querySelector('.menu-button')
-  const menu = document.querySelector('#site-nav')
+  const menu = document.getElementById('site-nav')
   const closeMenu = () => {
     menu.classList.remove('is-open')
     menuButton.setAttribute('aria-expanded', 'false')
@@ -10,99 +9,71 @@
   }
   menuButton.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') !== 'true'
+    menu.classList.toggle('is-open', open)
     menuButton.setAttribute('aria-expanded', String(open))
     menuButton.setAttribute('aria-label', open ? '关闭导航' : '打开导航')
-    menu.classList.toggle('is-open', open)
   })
-  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu))
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu))
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
       closeMenu()
       menuButton.focus()
     }
   })
-  window.matchMedia('(min-width: 641px)').addEventListener('change', (e) => {
-    if (e.matches) closeMenu()
+  window.matchMedia('(min-width: 641px)').addEventListener('change', (event) => {
+    if (event.matches) closeMenu()
   })
-  const icon = (id, extra = '') =>
-    `<svg class="icon ${extra}" aria-hidden="true"><use href="#${id}"/></svg>`
-  const favorites = new Set()
-  const products = [
-    {
-      id: 'morning',
-      title: '日常器物灵感',
-      note: '让每一天，多一点喜欢',
-      alt: '陶瓷杯与亚麻的日常场景',
-    },
-    {
-      id: 'journey',
-      title: '随行生活灵感',
-      note: '把心意，带在身边',
-      alt: '暖棕色随行包的生活场景',
-    },
-  ]
-  let currentScene = 'discover'
-  const phone = document.querySelector('#app-preview')
-  const content = document.querySelector('#phone-content')
-  const headings = { discover: '精选商城', favorites: '我的收藏', orders: '订单服务' }
-  const announcement = document.querySelector('#demo-announcement')
-  const productMarkup = (product) =>
-    `<article class="demo-product"><img src="assets/lifestyle-editorial.png" alt="${
-      product.alt
-    }" width="1122" height="1402" loading="lazy"><button class="demo-heart" data-favorite="${
-      product.id
-    }" aria-pressed="${favorites.has(product.id)}" aria-label="${
-      favorites.has(product.id) ? '取消收藏' : '收藏'
-    }${product.title}">${icon('heart')}</button><div class="demo-product-copy"><h4>${
-      product.title
-    }</h4><span>${product.note}</span></div></article>`
-  function renderScene() {
-    document.querySelector('#phone-heading').textContent = headings[currentScene]
-    phone.setAttribute('aria-labelledby', `tab-${currentScene}`)
-    if (currentScene === 'discover') {
-      content.innerHTML = `<div class="demo-search">${icon(
-        'search',
-      )}<span>搜索商品或分类</span></div><div class="demo-banner"><small>FOR EVERY LITTLE MOMENT</small><h4>为每一份喜欢，<br>留个位置。</h4></div><div class="demo-tags"><span>精选推荐</span><span>新品灵感</span><span>心动收藏</span></div><div class="demo-products">${products
-        .map(productMarkup)
-        .join('')}</div><p class="demo-note">试试点击爱心，再切换到「我的收藏」。</p>`
-    } else if (currentScene === 'favorites') {
-      const selected = products.filter((product) => favorites.has(product.id))
-      content.innerHTML = `<div class="demo-favorite-heading">${icon(
-        'heart',
-      )}<div><h4>把喜欢，放在一起。</h4><p>示例清单 · 已收藏 ${selected.length} 项</p></div></div>${
-        selected.length
-          ? `<div class="demo-products">${selected
-              .map(productMarkup)
-              .join('')}</div><p class="demo-note">这些心意，随时都能回来看看。</p>`
-          : `<div class="demo-empty">${icon(
-              'heart',
-            )}<span>心动清单，等你来填满。</span><span>在「发现好物」演示中点击爱心即可体验。</span></div>`
-      }`
-    } else {
-      content.innerHTML = `<div class="demo-banner"><small>EVERY STEP, AT EASE</small><h4>购物进度，<br>一目了然。</h4></div><div class="demo-order"><div class="demo-order-top"><span>示例订单</span><strong>待收货</strong></div><h4>每一份心意，都有迹可循。</h4><div class="demo-progress"><span class="done"><i></i>已下单</span><span class="done"><i></i>已发货</span><span><i></i>待收货</span></div><div class="demo-service-row"><span>订单状态</span><b>集中查看</b></div><div class="demo-service-row"><span>售后服务</span><b>清晰入口</b></div></div><p class="demo-note">此处为流程示意，不关联真实订单。</p>`
-    }
-    phone
-      .querySelectorAll('.phone-bottom>span')
-      .forEach((item, index) =>
-        item.classList.toggle(
-          'current',
-          index === (currentScene === 'discover' ? 0 : currentScene === 'favorites' ? 1 : 2),
-        ),
-      )
+  const announcement = document.getElementById('demo-announcement')
+  const materials = {
+    gold: { name: '鎏金切面', description: '原始股本' },
+    amethyst: { name: '紫晶轨道', description: '原始股权' },
+    jade: { name: '青玉', description: '原始股票' },
+    platinum: { name: '星银', description: '金管同创' },
   }
-  function setScene(scene, announce = true) {
-    if (!Object.hasOwn(headings, scene)) return
-    currentScene = scene
-    document.querySelectorAll('.scene-tab').forEach((tab) => {
-      const active = tab.dataset.scene === scene
-      tab.classList.toggle('active', active)
-      tab.setAttribute('aria-selected', String(active))
-      tab.tabIndex = active ? 0 : -1
+  document.querySelectorAll('.material-picker button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.material
+      if (!Object.hasOwn(materials, key)) return
+      document.getElementById('material-card').dataset.material = key
+      document.getElementById('material-name').textContent = materials[key].name
+      document.getElementById('material-description').textContent = materials[key].description
+      document.querySelectorAll('.material-picker button').forEach((item) => {
+        item.setAttribute('aria-pressed', String(item === button))
+      })
+      announcement.textContent = `已切换到${materials[key].name}卡面展示。`
     })
-    renderScene()
-    if (announce) announcement.textContent = `已切换到${headings[scene]}界面演示。`
+  })
+  const scenes = {
+    shopping: {
+      title: '商城与订单',
+      content:
+        '<h3 class="scene-content-title">选购与订单，一处衔接。</h3><p class="scene-subtitle">从找到商品，到跟进订单</p><div class="demo-tools"><span>分类搜索</span><span>我的收藏</span><span>购物车</span></div><div class="demo-block"><h4>我的订单</h4><div class="demo-row"><span>付款进度</span><span>查看付款与确认状态</span></div><div class="demo-row"><span>物流进度</span><span>查看发货与收货状态</span></div><div class="demo-row"><span>退款售后</span><span>按订单状态提供操作</span></div></div><p class="demo-list-label">订单详情集中展示商品、收货和支付信息。</p>',
+    },
+    community: {
+      title: '会员与社区',
+      content:
+        '<h3 class="scene-content-title">连接有迹，服务有期。</h3><p class="scene-subtitle">查看分享关系、成员与会员服务</p><div class="demo-path"><span>我的推荐</span><span>↔</span><span>我的社区</span></div><div class="demo-block"><h4>成员信息</h4><div class="demo-row"><span>成员资料</span><span>昵称与账号</span></div><div class="demo-row"><span>服务状态</span><span>已开通 / 未开通</span></div><div class="demo-row"><span>会员服务</span><span>查看有效期与续费入口</span></div></div><p class="demo-list-label">成员信息与服务状态，在个人中心统一查看。</p>',
+    },
+    equity: {
+      title: '我的股权',
+      content:
+        '<h3 class="scene-content-title">专属卡片，清晰收纳。</h3><p class="scene-subtitle">分组概览 → 展开明细 → 独立转让入口</p><div class="demo-card-mini"><small>◇ ORIGINAL EQUITY · 卡面示意</small><strong>专属股权卡包</strong><p>分组查看 · 独立编号 · 整张持有</p></div><div class="demo-block"><div class="demo-row"><span>卡片明细</span><span>编号 / 来源 / 状态</span></div><div class="demo-row"><span>转让页面</span><span>选择卡片 / 查看记录</span></div></div><p class="demo-list-label">持有数量和可用状态以账户内实际展示为准。</p>',
+    },
   }
   const tabs = [...document.querySelectorAll('.scene-tab')]
+  const panel = document.getElementById('scene-panel')
+  function setScene(key, announce = true) {
+    if (!Object.hasOwn(scenes, key)) return
+    tabs.forEach((tab) => {
+      const selected = tab.dataset.scene === key
+      tab.classList.toggle('active', selected)
+      tab.setAttribute('aria-selected', String(selected))
+      tab.tabIndex = selected ? 0 : -1
+    })
+    panel.setAttribute('aria-labelledby', `tab-${key}`)
+    document.getElementById('scene-content').innerHTML = scenes[key].content
+    if (announce) announcement.textContent = `已切换到${scenes[key].title}功能示意。`
+  }
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => setScene(tab.dataset.scene))
     tab.addEventListener('keydown', (event) => {
@@ -119,69 +90,20 @@
       }
     })
   })
-  document
-    .querySelectorAll('[data-scene-link]')
-    .forEach((link) => link.addEventListener('click', () => setScene(link.dataset.sceneLink)))
-  content.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-favorite]')
-    if (!button) return
-    const id = button.dataset.favorite
-    if (!products.some((product) => product.id === id)) return
-    const active = !favorites.has(id)
-    active ? favorites.add(id) : favorites.delete(id)
-    const product = products.find((product) => product.id === id)
-    if (currentScene === 'favorites') renderScene()
-    else {
-      button.setAttribute('aria-pressed', String(active))
-      button.setAttribute('aria-label', `${active ? '取消收藏' : '收藏'}${product.title}`)
-    }
-    announcement.textContent = `${active ? '已收藏' : '已取消收藏'}${
-      product.title
-    }。这是网站演示，不关联 App 账户。`
-  })
-  const modeButton = document.querySelector('.phone-mode')
-  modeButton.addEventListener('click', () => {
-    const dark = phone.dataset.mode !== 'dark'
-    phone.dataset.mode = dark ? 'dark' : 'light'
-    modeButton.setAttribute('aria-pressed', String(dark))
-    modeButton.setAttribute('aria-label', `切换到${dark ? '浅色' : '深色'}界面演示`)
-    announcement.textContent = `已切换到${dark ? '深色' : '浅色'}界面演示。`
-  })
-  document.querySelectorAll('.faq-list details').forEach((details) =>
+  const orientation = window.matchMedia('(max-width: 640px)')
+  const setOrientation = () =>
+    document
+      .querySelector('.scene-tabs')
+      .setAttribute('aria-orientation', orientation.matches ? 'horizontal' : 'vertical')
+  orientation.addEventListener('change', setOrientation)
+  setOrientation()
+  document.querySelectorAll('.faq-list details').forEach((details) => {
     details.addEventListener('toggle', () => {
       if (details.open)
         document.querySelectorAll('.faq-list details').forEach((other) => {
           if (other !== details) other.open = false
         })
-    }),
-  )
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            revealObserver.unobserve(entry.target)
-          }
-        }),
-      { threshold: 0.08 },
-    )
-    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element))
-    const navObserver = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting)
-            menu.querySelectorAll('a:not(.nav-cta)').forEach((link) => {
-              if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'true')
-              else link.removeAttribute('aria-current')
-            })
-        }),
-      { rootMargin: '-25% 0px -55% 0px' },
-    )
-    ;['discover', 'experience', 'about', 'questions'].forEach((id) =>
-      navObserver.observe(document.getElementById(id)),
-    )
-  } else
-    document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'))
-  setScene('discover', false)
+    })
+  })
+  setScene('shopping', false)
 })()

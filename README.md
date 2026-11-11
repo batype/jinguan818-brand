@@ -1,25 +1,30 @@
 # 金管818 品牌宣传网站
 
-独立、无构建依赖的静态宣传站。仅介绍精选商城、商品收藏、订单与售后、个人中心及会员服务。不设下载入口，不连接 App 业务接口，不使用真实用户或订单数据。
+独立静态宣传站，介绍当前 App 的商城购物、会员社区、股权卡包和活动公告。无下载入口，不连接业务接口，不收集个人信息，不展示真实账户或订单。
 
 ## 本地预览
 
-在当前目录执行 `python3 -m http.server 5191 --directory dist`，访问 `http://127.0.0.1:5191`。直接打开 `dist/index.html` 也可以查看。
+在当前目录执行 `python3 -m http.server 5191 --bind 127.0.0.1 --directory dist`，访问 `http://127.0.0.1:5191`。
 
-## 内容维护
+## 内容与素材依据
 
-- `dist/index.html`：品牌文案、各展示区域、服务指南。
-- `dist/styles.css`：独立的响应式视觉样式，不影响 App 主题。
-- `dist/app.js`：手机端导航、三种功能演示、演示收藏、演示深浅色、FAQ。
-- `dist/assets/brand-mark.png`：来自当前 App 的品牌图片。
-- `dist/assets/lifestyle-editorial.png`：生成的生活场景配图，不代表实际商品或库存。
+- 商城购物与订单：`src/pages/shop/index.vue`、`src/pages/my/order/list/`。
+- 社区成员与分享关系：`src/pages/my/invite/index.vue`，不包装成聊天、论坛功能。
+- 会员服务：`src/pages/my/monthly-service/`，仅介绍开通、续费与有效期。
+- 股权卡包：`src/pages/my/equity/index.vue` 与 `grouping.ts`，按现有分组保留鎏金、紫晶、青玉、星银风格，介绍编号、分组和整张转让，不承诺回报。
+- 活动介绍：`src/pages/game/games/index.vue` 与 `src/pages/my/qwgp/index.vue`。仅介绍现有模块、规则入口和状态查看，不提供参与操作。
+- `dist/assets/brand-mark.png`：App 品牌图片。
+- `dist/assets/qijing-poster.png`：原样复制 `src/static/qijing.png`。嵌入为海报图片，不绑定加入等业务操作。
+- 其余卡面与关系图由 HTML/CSS 绘制，是功能视觉示意，不是账户截图。
 
-界面为网站内的本地演示，收藏状态只保存在当前页面内存，不关联 App 账户，不产生订单、不收集个人信息。
+不介绍数字货币相关内容，不将尚未实现的生活缴费、出行或客服入口当作已上线能力。删除旧版无实际商品依据的生活用品配图与虚构底栏。页面存在功能不代表所有账户均可使用，使用条件以 App 为准。
 
-## 配图来源
+## 维护与验证
 
-生活场景图使用内置 ImageGen 生成。提示词：温暖奶油色背景中的陶瓷杯、花瓶、橄榄枝、亚麻布与棕色随行包，柔和自然日光、哑光材质、克制的生活方式杂志摄影，无文字、无商标。原图由输出目录复制至 `dist/assets/lifestyle-editorial.png`。
+`dist/index.html` 为文案与结构；`dist/styles.css` 为独立响应式样式；`dist/app.js` 提供卡面切换、功能场景、移动导航与 FAQ 交互。
+
+运行 `node verify.mjs` 检查脚本语法、静态资源、锚点及内容边界。修改交互或布局后补充浏览器验证。
 
 ## 发布
 
-仅当前目录作为独立 Sites 项目，`.openai/hosting.json` 关联同一站点。发布默认保留私密可见范围；不自动更改访问权限或 App 发布配置。
+仅本目录作为独立 Sites 项目，`.openai/hosting.json` 保留原站点身份和静态目录。保留站点现有访问范围，不修改 App 发布配置。
