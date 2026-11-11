@@ -37,4 +37,4 @@ GitHub 仓库：`https://github.com/batype/jinguan818-brand`。
 
 工作流先执行站点校验，再仅上传 `dist/` 的静态文件。分享地址会在临时发布目录中替换为 GitHub Pages 地址，不修改原 Sites 页面或其访问权限，不上传 `.openai/`、Git 元数据与其他源码文件。后续更新也手动运行同一工作流。
 
-当前启用状态：GitHub API 返回 `422: Your current plan does not support GitHub Pages for this repository`。仓库保持私有；需要账号具备私有仓库 Pages 权限，或由所有者确认将宣传站仓库公开后才能启用。部署配置已准备，尚未产生可访问的 Pages 站点。
+仓库已由所有者确认公开，并启用 GitHub Actions 作为 Pages 发布源。站点地址：`https://batype.github.io/jinguan818-brand/`。每次发布可在 Actions 中查看结果；主 App 仓库和原 Sites 站点的访问设置不受影响。
