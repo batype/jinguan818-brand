@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#060d18" />
+    <meta name="theme-color" content="#111110" />
     <meta
       name="description"
       content="火炎焱多元化（广州）投资有限公司，立足广州，以科技研发为核心，连接多元产业与线上线下服务，秉承客户利益至上，执善心，筑大业。" />
@@ -18,9 +18,11 @@
     <title>火炎焱多元化（广州）投资有限公司 · 以科技之势，聚产业之力</title>
     <link rel="icon" type="image/svg+xml" href="assets/huoyanyan-mark.svg" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="sculpture.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
     <a class="skip-link" href="#main">跳至主要内容</a>
     <svg class="definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
@@ -65,12 +67,15 @@
     </header>
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
         <div class="hero-inner shell">
           <div class="hero-copy">
             <p class="eyebrow"><span class="signal-dot"></span> HUOYANYAN · GUANGZHOU, CHINA</p>
             <p class="hero-company">火炎焱多元化（广州）投资有限公司</p>
-            <h1 id="hero-title">以科技之势，<br /><span>聚产业之力。</span></h1>
+            <h1 id="hero-title">
+              <span class="title-line">以科技之势，</span
+              ><span class="title-line">聚产业之力<span class="accent-period">。</span></span>
+            </h1>
             <p class="hero-description">
               以技术研发为核心，以实体经营为根基。<br />连接线上与线下，让多元产业协同向前。
             </p>
@@ -84,142 +89,32 @@
               <p>科技驱动 / 多元布局 / 长期视野</p>
             </div>
           </div>
-          <div class="hero-art" aria-label="由三座发光棱柱组成的抽象科技视觉">
-            <div class="art-coordinate coordinate-top">TECHNOLOGY × INDUSTRY</div>
-            <svg
-              class="prism-scene"
-              viewBox="0 0 620 620"
-              role="img"
-              aria-label="三座蓝色与金色光柱交汇，象征科技、产业和服务协同">
-              <defs>
-                <linearGradient id="blue-front" x1="0" y1="0" x2="1" y2="1">
-                  <stop stop-color="#b9e3ff" stop-opacity=".8" />
-                  <stop offset=".45" stop-color="#2580db" stop-opacity=".3" />
-                  <stop offset="1" stop-color="#092c61" stop-opacity=".8" />
-                </linearGradient>
-                <linearGradient id="blue-side">
-                  <stop stop-color="#0d2d55" stop-opacity=".9" />
-                  <stop offset="1" stop-color="#228eff" stop-opacity=".5" />
-                </linearGradient>
-                <linearGradient id="gold-front" x2="0" y2="1">
-                  <stop stop-color="#ffdc9a" stop-opacity=".9" />
-                  <stop offset="1" stop-color="#8c5928" stop-opacity=".3" />
-                </linearGradient>
-                <radialGradient id="ground-glow">
-                  <stop stop-color="#1e70da" stop-opacity=".5" />
-                  <stop offset="1" stop-color="#1e70da" stop-opacity="0" />
-                </radialGradient>
-                <filter id="glow"><feGaussianBlur stdDeviation="5" /></filter>
-              </defs>
-              <ellipse cx="310" cy="440" rx="280" ry="120" fill="url(#ground-glow)" />
-              <g class="orbital-ring" fill="none" stroke="#67b9ff" stroke-opacity=".25">
-                <ellipse cx="310" cy="365" rx="277" ry="97" transform="rotate(-25 310 365)" />
-                <ellipse cx="310" cy="365" rx="258" ry="83" transform="rotate(26 310 365)" />
-                <ellipse cx="310" cy="435" rx="213" ry="65" stroke-dasharray="2 8" />
-              </g>
-              <g fill="none" stroke="#5995cb" stroke-opacity=".18">
-                <path d="m75 426 235-134 235 134-235 135Z" />
-                <path
-                  d="m120 452 235-134M167 478l235-134M214 505l235-134M261 531l235-134M120 399l235 135M167 372l235 135M214 345l235 135M261 318l235 135" />
-              </g>
-              <g class="prism prism-left">
-                <path
-                  d="m155 258 66-38 55 32-66 38Z"
-                  fill="#91cdf4"
-                  fill-opacity=".5"
-                  stroke="#a8d8ff"
-                  stroke-opacity=".65" />
-                <path
-                  d="m155 258 55 32v188l-55-32Z"
-                  fill="url(#blue-side)"
-                  stroke="#5caff0"
-                  stroke-opacity=".5" />
-                <path
-                  d="m210 290 66-38v188l-66 38Z"
-                  fill="url(#blue-front)"
-                  stroke="#74b9ff"
-                  stroke-opacity=".65" />
-                <path d="M210 290v188" stroke="#acddff" />
-                <path
-                  d="m224 296 39-22v146l-39 23Z"
-                  fill="none"
-                  stroke="#95d5ff"
-                  stroke-opacity=".25" />
-              </g>
-              <g class="prism prism-right">
-                <path
-                  d="m361 280 66-38 55 32-66 38Z"
-                  fill="#b0dcff"
-                  fill-opacity=".7"
-                  stroke="#98d3ff"
-                  stroke-opacity=".7" />
-                <path
-                  d="m361 280 55 32v152l-55-32Z"
-                  fill="url(#blue-side)"
-                  stroke="#5caff0"
-                  stroke-opacity=".5" />
-                <path
-                  d="m416 312 66-38v152l-66 38Z"
-                  fill="url(#blue-front)"
-                  stroke="#74b9ff"
-                  stroke-opacity=".65" />
-                <path d="M416 312v152" stroke="#b8e5ff" />
-              </g>
-              <g class="prism prism-center">
-                <path d="m244 144 74-43 61 35-74 43Z" fill="#fae2b2" stroke="#ffe6bb" />
-                <path
-                  d="m244 144 61 35v272l-61-35Z"
-                  fill="#75502d"
-                  fill-opacity=".4"
-                  stroke="#cba25f"
-                  stroke-opacity=".6" />
-                <path
-                  d="m305 179 74-43v272l-74 43Z"
-                  fill="url(#gold-front)"
-                  stroke="#f6cf8b"
-                  stroke-opacity=".8" />
-                <path d="M305 179v272" stroke="#fff1d2" />
-                <path
-                  d="m320 195 44-25v220l-44 25Z"
-                  fill="none"
-                  stroke="#ffe1ab"
-                  stroke-opacity=".4" />
-                <path
-                  d="m326 220 31-18m-31 44 31-18m-31 44 31-18m-31 44 31-18m-31 44 31-18m-31 44 31-18"
-                  stroke="#ffe1ab"
-                  stroke-opacity=".25" />
-              </g>
-              <path
-                d="m156 258 54 32 66-38m-32-108 61 35 74-43m-18 144 55 32 66-38"
-                fill="none"
-                stroke="#a9d9ff"
-                stroke-width="4"
-                filter="url(#glow)" />
-              <g fill="#bddfff">
-                <circle cx="75" cy="416" r="3" />
-                <circle cx="525" cy="284" r="3" />
-                <circle cx="372" cy="520" r="2" />
-                <circle cx="495" cy="441" r="2" />
-              </g>
-              <g fill="none" stroke="#92c5ed" stroke-opacity=".4">
-                <path d="M142 227V180h53M446 472h54v-55M307 79V55m-12 12h24" />
-              </g>
-            </svg>
-            <div class="art-coordinate coordinate-bottom">
-              <span>三重驱动</span><span>科技 / 产业 / 服务</span>
-            </div>
-            <span class="art-caption">战略理念视觉</span>
+          <div class="hero-art" aria-label="可随指针与滚动变化的金属雕塑视觉">
+            <div class="sculpture-halo" aria-hidden="true"></div>
+            <img
+              class="sculpture-fallback"
+              src="assets/sculpture-fallback.svg"
+              width="700"
+              height="700"
+              alt=""
+              aria-hidden="true" />
+            <canvas id="sculpture" aria-hidden="true"></canvas>
+            <span class="sculpture-signature">THE SHAPE OF<br /><b>POSSIBILITY.</b></span>
+            <span class="sculpture-caption">品牌概念视觉</span>
           </div>
         </div>
         <div class="hero-bottom shell">
           <span>立足广州 · 面向未来</span
           ><a href="#about" class="scroll-cue">SCROLL TO EXPLORE <span>↓</span></a
-          ><span>执善心，筑大业</span>
+          ><button class="motion-toggle" type="button" aria-pressed="false">
+            <span class="pause-glyph" aria-hidden="true">Ⅱ</span
+            ><span class="motion-label">暂停动态效果</span>
+          </button>
         </div>
       </section>
       <section class="about section shell" id="about" aria-labelledby="about-title">
         <div class="section-top">
-          <p class="eyebrow">01 / ABOUT HUOYANYAN</p>
+          <p class="eyebrow">01 — 关于火炎焱</p>
           <span class="section-caption">公司概况</span>
         </div>
         <div class="about-layout">
@@ -262,10 +157,20 @@
           <p>综合化<i></i>大型化<i></i>公众化<i></i>集团化<i></i>人文化</p>
         </div>
       </section>
+      <section class="city-chapter" aria-labelledby="city-title">
+        <div class="city-image" aria-hidden="true"></div>
+        <div class="city-copy shell">
+          <p class="eyebrow">ROOTED IN GUANGZHOU.</p>
+          <h2 id="city-title">立足一座城。<br />放眼更远处。</h2>
+          <p>在实体中扎根，向广阔处生长。</p>
+          <span class="city-location">中国 · 广州 / 城市影像</span>
+        </div>
+        <div class="city-shutter" aria-hidden="true"></div>
+      </section>
       <section class="portfolio section" id="portfolio" aria-labelledby="portfolio-title">
         <div class="shell">
           <div class="section-top">
-            <p class="eyebrow">02 / DIVERSIFIED PERSPECTIVES</p>
+            <p class="eyebrow">02 — 战略布局</p>
             <span class="section-caption">多元布局 · 协同发展</span>
           </div>
           <div class="section-heading">
@@ -346,14 +251,11 @@
               aria-labelledby="tab-technology"
               tabindex="0">
               <div class="sector-visual" data-sector="technology" aria-hidden="true">
-                <div class="sector-orbit orbit-a"></div>
-                <div class="sector-orbit orbit-b"></div>
-                <div class="sector-orbit orbit-c"></div>
-                <div class="sector-core"><span>H</span><i></i></div>
-                <div class="sector-satellite satellite-a"></div>
-                <div class="sector-satellite satellite-b"></div>
-                <span class="sector-visual-label">TECHNOLOGY & INDUSTRY</span
-                ><span class="sector-serial">01 / 06</span>
+                <span class="sector-serial">01 / 06</span>
+                <div class="sector-type">TECH<br /><i>NOLOGY.</i></div>
+                <div class="sector-slice slice-one"></div>
+                <div class="sector-slice slice-two"></div>
+                <span class="sector-visual-label">TECHNOLOGY & INDUSTRY</span>
               </div>
               <div class="sector-copy" id="sector-copy">
                 <p class="eyebrow">TECHNOLOGY & INDUSTRY</p>
@@ -374,7 +276,7 @@
       </section>
       <section class="innovation section shell" id="innovation" aria-labelledby="innovation-title">
         <div class="section-top">
-          <p class="eyebrow">03 / TECHNOLOGY WITH PURPOSE</p>
+          <p class="eyebrow">03 — 科技与服务</p>
           <span class="section-caption">科技与服务</span>
         </div>
         <div class="innovation-layout">
@@ -436,7 +338,7 @@
         aria-labelledby="responsibility-title">
         <div class="shell">
           <div class="section-top">
-            <p class="eyebrow">04 / RESPONSIBILITY & CARE</p>
+            <p class="eyebrow">04 — 社会责任</p>
             <span class="section-caption">社会责任</span>
           </div>
           <div class="responsibility-layout">
@@ -512,7 +414,7 @@
       </section>
       <section class="culture section shell" id="culture" aria-labelledby="culture-title">
         <div class="section-top">
-          <p class="eyebrow">05 / VALUES THAT GUIDE US</p>
+          <p class="eyebrow">05 — 企业文化</p>
           <span class="section-caption">企业文化</span>
         </div>
         <div class="culture-heading">
@@ -545,7 +447,7 @@
       <section class="leadership section" id="leadership" aria-labelledby="leadership-title">
         <div class="shell">
           <div class="section-top">
-            <p class="eyebrow">06 / A MESSAGE FOR THE FUTURE</p>
+            <p class="eyebrow">06 — 领导致辞</p>
             <span class="section-caption">领导致辞</span>
           </div>
           <div class="leadership-layout">
@@ -606,6 +508,21 @@
       <div class="shell footer-bottom">
         <span>© 2026 火炎焱多元化（广州）投资有限公司</span
         ><span>科技驱动 · 产业协同 · 责任同行</span>
+      </div>
+      <div class="shell photo-credit">
+        广州城市照片：<a
+          href="https://commons.wikimedia.org/wiki/File:Guangzhou_skyline.jpg"
+          target="_blank"
+          rel="noopener noreferrer"
+          >jo.sau / Wikimedia Commons</a
+        >
+        ·
+        <a
+          href="https://creativecommons.org/licenses/by/2.0/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >CC BY 2.0</a
+        >，页面作裁切与色调处理。
       </div>
     </footer>
   </body>

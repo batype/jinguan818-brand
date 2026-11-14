@@ -7,6 +7,7 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
 const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8')
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8')
 new vm.Script(js)
+new vm.Script(fs.readFileSync(path.join(root, 'sculpture.js'), 'utf8'))
 assert(html.includes('<html lang="zh-CN">'))
 assert(html.includes('<title>火炎焱多元化（广州）投资有限公司'))
 assert(
@@ -21,7 +22,9 @@ for (const [, fragment] of html.matchAll(/(?:href|aria-controls)="#?([^"]+)"/g))
   if (!fragment.startsWith('assets/') && !fragment.includes('.') && !fragment.includes(':'))
     assert(ids.has(fragment), `锚点或控制目标缺失：${fragment}`)
 }
-for (const [, file] of html.matchAll(/(?:src|href)="((?:assets\/|styles\.css|app\.js)[^"]*)"/g))
+for (const [, file] of html.matchAll(
+  /(?:src|href)="((?:assets\/|styles\.css|app\.js|sculpture\.js)[^"]*)"/g,
+))
   assert(fs.existsSync(path.join(root, file)), `资源缺失：${file}`)
 assert(!/<form\b|type="password"|tel:|mailto:/i.test(html))
 for (const name of ['公司概况', '战略布局', '科技与服务', '社会责任', '企业文化', '领导致辞'])

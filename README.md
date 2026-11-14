@@ -12,15 +12,17 @@
 - 原资料中的荣誉均为争取目标，不制作获奖墙，不虚构规模、排名、投资项目、资质、客户或管理资产数据。
 - 沿用用户要求：不展示数字货币相关内容，不设置 App 下载入口。删去原 App 卡包、游戏和支付功能演示。
 - 未提供公开电话、邮箱、详细地址和领导姓名，页面不虚构这些资料，也不设置无后端的咨询表单。
-- 头部图形和三棱柱科技视觉是网站视觉设计，不声称是注册商标、真实办公楼或实际投资项目照片。SVG/CSS 本地绘制，无第三方图片或运行时依赖。
+- 头部标记与金属雕塑为品牌概念视觉，不声称是注册商标或实际投资项目。雕塑由本地 WebGL 着色器实时绘制，支持鼠标与滚动响应、暂停、离屏停帧、减少动态效果和静态 SVG 回退。无外部运行时依赖。
 
 ## 本地预览与维护
 
 在本目录执行 `python3 -m http.server 5191 --bind 127.0.0.1 --directory dist`，访问 `http://127.0.0.1:5191`。
 
 - `dist/index.html`：公司文案、页面结构与内联科技视觉。
-- `dist/styles.css`：响应式深色科技风格与减少动态效果支持。
-- `dist/app.js`：六大布局切换、键盘操作、移动导航与导航位置提示。
+- `dist/styles.css`：曜石黑、暖银与朱砂橙的明暗章节布局、滚动入场、产业转场及减少动态效果支持。
+- `dist/app.js`：六大布局切换、键盘操作、移动导航、滚动进度、章节揭示、指针反馈与动效暂停。
+- `dist/sculpture.js`：本地金属扭环着色器，帧率与像素数限制、可见性暂停、静态回退。
+- `dist/assets/guangzhou-skyline.jpg`：jo.sau 拍摄的广州实景，仅作为城市影像，不代表公司办公地或资产。原始来源 [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Guangzhou_skyline.jpg)，[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)，网页以 CSS 作裁切与色调处理。页面页脚也保留署名、来源和许可链接。
 - `dist/assets/huoyanyan-mark.svg`：官网文字品牌旁的视觉标记。
 - `dist/assets/company-share.svg`：公司官网分享图。
 - `verify.mjs`：脚本语法、静态资源、内部锚点、内容边界检查。
