@@ -40,6 +40,8 @@ jobs:
         run: |
           python3 - <<'PY'
           import os
+          import hashlib
+          import re
           import shutil
           from pathlib import Path
 
@@ -49,6 +51,15 @@ jobs:
           base_url = os.environ['PAGES_BASE_URL'].rstrip('/')
           html = index.read_text()
           html = html.replace('https://batype.github.io/jinguan818-brand', base_url)
+          def version_asset(match):
+              filename = match.group('file')
+              digest = hashlib.sha256((target / filename).read_bytes()).hexdigest()[:10]
+              return f'{match.group("prefix")}{filename}?v={digest}"'
+          html = re.sub(
+              r'(?P<prefix>(?:src|href)=")(?P<file>assets/[^"?#]+|styles\.css|app\.js|sculpture\.js)"',
+              version_asset,
+              html,
+          )
           index.write_text(html)
           (target / '.nojekyll').touch()
           PY
