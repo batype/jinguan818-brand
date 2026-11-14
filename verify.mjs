@@ -8,20 +8,28 @@ const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8')
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8')
 new vm.Script(js)
 assert(html.includes('<html lang="zh-CN">'))
-assert(html.includes('<title>金管818'))
+assert(html.includes('<title>火炎焱多元化（广州）投资有限公司'))
 assert(
-  !/USDT|XRP|XMJ|数字货币|区块链|质押|钱包|收益|公排|奖池|彩票|下载|download/i.test(
+  !/USDT|XRP|XMJ|数字货币|数字资产|货币交易|货币开发|区块链|质押|钱包|收益|公排|奖池|彩票|下载|download|金管818|股权卡包|宝殿轮回/i.test(
     html + js + css,
   ),
 )
-const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]))
-for (const [, fragment] of html.matchAll(/<a\b[^>]*href="#([^"]+)"/g))
-  assert(ids.has(fragment), `锚点缺失：${fragment}`)
+const allIds = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
+const ids = new Set(allIds)
+assert.equal(ids.size, allIds.length, '页面 ID 重复')
+for (const [, fragment] of html.matchAll(/(?:href|aria-controls)="#?([^"]+)"/g)) {
+  if (!fragment.startsWith('assets/') && !fragment.includes('.') && !fragment.includes(':'))
+    assert(ids.has(fragment), `锚点或控制目标缺失：${fragment}`)
+}
 for (const [, file] of html.matchAll(/(?:src|href)="((?:assets\/|styles\.css|app\.js)[^"]*)"/g))
   assert(fs.existsSync(path.join(root, file)), `资源缺失：${file}`)
 assert(!/<form\b|type="password"|tel:|mailto:/i.test(html))
-assert(fs.statSync(path.join(root, 'assets/qijing-poster.png')).size > 1000)
-for (const name of ['商城购物', '会员社区', '专属股权卡包', '活动公告'])
-  assert(html.includes(name), `主要模块缺失：${name}`)
-assert(!/lifestyle-editorial|phone-bottom|日常器物灵感|随行生活灵感/.test(html + js + css))
-console.log('宣传站检查通过：脚本语法、静态资源、内部锚点、内容边界与无个人信息收集表单。')
+for (const name of ['公司概况', '战略布局', '科技与服务', '社会责任', '企业文化', '领导致辞'])
+  assert(html.includes(name), `板块缺失：${name}`)
+assert.equal((html.match(/role="tab"/g) || []).length, 6)
+assert(
+  !/中国最佳雇主|中国最佳企业公民|最佳服务品牌奖|管理资产.{0,12}[亿万]|年化|保本|稳赚|已获.{0,12}荣誉/.test(
+    html + js,
+  ),
+)
+console.log('公司官网检查通过：脚本语法、资源、锚点、六大战略布局及内容边界。')

@@ -48,7 +48,7 @@ jobs:
           index = target / 'index.html'
           base_url = os.environ['PAGES_BASE_URL'].rstrip('/')
           html = index.read_text()
-          html = html.replace('https://jinguan818-life.batype.chatgpt.site', base_url)
+          html = html.replace('https://batype.github.io/jinguan818-brand', base_url)
           index.write_text(html)
           (target / '.nojekyll').touch()
           PY

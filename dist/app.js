@@ -20,90 +20,112 @@
       menuButton.focus()
     }
   })
-  window.matchMedia('(min-width: 641px)').addEventListener('change', (event) => {
-    if (event.matches) closeMenu()
-  })
-  const announcement = document.getElementById('demo-announcement')
-  const materials = {
-    gold: { name: '鎏金切面', description: '原始股本' },
-    amethyst: { name: '紫晶轨道', description: '原始股权' },
-    jade: { name: '青玉', description: '原始股票' },
-    platinum: { name: '星银', description: '金管同创' },
+  const mobile = window.matchMedia('(max-width: 640px)')
+  const updateLayout = () => {
+    document
+      .querySelector('.portfolio-tabs')
+      .setAttribute('aria-orientation', mobile.matches ? 'horizontal' : 'vertical')
+    if (!mobile.matches) closeMenu()
   }
-  document.querySelectorAll('.material-picker button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const key = button.dataset.material
-      if (!Object.hasOwn(materials, key)) return
-      document.getElementById('material-card').dataset.material = key
-      document.getElementById('material-name').textContent = materials[key].name
-      document.getElementById('material-description').textContent = materials[key].description
-      document.querySelectorAll('.material-picker button').forEach((item) => {
-        item.setAttribute('aria-pressed', String(item === button))
-      })
-      announcement.textContent = `已切换到${materials[key].name}卡面展示。`
-    })
-  })
-  const scenes = {
-    shopping: {
-      title: '商城与订单',
-      content:
-        '<h3 class="scene-content-title">选购与订单，一处衔接。</h3><p class="scene-subtitle">从找到商品，到跟进订单</p><div class="demo-tools"><span>分类搜索</span><span>我的收藏</span><span>购物车</span></div><div class="demo-block"><h4>我的订单</h4><div class="demo-row"><span>付款进度</span><span>查看付款与确认状态</span></div><div class="demo-row"><span>物流进度</span><span>查看发货与收货状态</span></div><div class="demo-row"><span>退款售后</span><span>按订单状态提供操作</span></div></div><p class="demo-list-label">订单详情集中展示商品、收货和支付信息。</p>',
+  mobile.addEventListener('change', updateLayout)
+  const sectors = {
+    technology: {
+      english: 'TECHNOLOGY & INDUSTRY',
+      title: '让创新走向实际应用。',
+      text: '以技术研发为核心，关注科学研究成果转化、项目投资与产业应用，探索技术、资本与实体经营的连接。',
+      tags: ['技术研发', '科研成果转化', '项目投资'],
     },
-    community: {
-      title: '会员与社区',
-      content:
-        '<h3 class="scene-content-title">连接有迹，服务有期。</h3><p class="scene-subtitle">查看分享关系、成员与会员服务</p><div class="demo-path"><span>我的推荐</span><span>↔</span><span>我的社区</span></div><div class="demo-block"><h4>成员信息</h4><div class="demo-row"><span>成员资料</span><span>昵称与账号</span></div><div class="demo-row"><span>服务状态</span><span>已开通 / 未开通</span></div><div class="demo-row"><span>会员服务</span><span>查看有效期与续费入口</span></div></div><p class="demo-list-label">成员信息与服务状态，在个人中心统一查看。</p>',
+    supply: {
+      english: 'SUPPLY CHAIN & COMMERCE',
+      title: '连接源头，也连接需求。',
+      text: '围绕供应链管理与商品流通，布局网上购物、农副产品对接、珠宝贵金属源头供货及商品贸易，探索线上线下协同。',
+      tags: ['供应链管理', '农副产品对接', '商品贸易'],
     },
-    equity: {
-      title: '我的股权',
-      content:
-        '<h3 class="scene-content-title">专属卡片，清晰收纳。</h3><p class="scene-subtitle">分组概览 → 展开明细 → 独立转让入口</p><div class="demo-card-mini"><small>◇ ORIGINAL EQUITY · 卡面示意</small><strong>专属股权卡包</strong><p>分组查看 · 独立编号 · 整张持有</p></div><div class="demo-block"><div class="demo-row"><span>卡片明细</span><span>编号 / 来源 / 状态</span></div><div class="demo-row"><span>转让页面</span><span>选择卡片 / 查看记录</span></div></div><p class="demo-list-label">持有数量和可用状态以账户内实际展示为准。</p>',
+    health: {
+      english: 'HEALTH & SENIOR CARE',
+      title: '让关怀贯穿更长的人生。',
+      text: '以老有所依、老有所养、老有所安为关注方向，将养老健康产业与生物科技作为后续战略发展的重要议题。',
+      tags: ['养老健康', '长者生活', '生物科技方向'],
+    },
+    energy: {
+      english: 'ENERGY & MOBILITY',
+      title: '面向更可持续的生活方式。',
+      text: '关注能源节约与出行需求，布局汽车销售、充电桩安装及管理、旅游出行等领域，探索产业协同与服务创新。',
+      tags: ['能源节约', '汽车与充电设施', '旅游出行'],
+    },
+    assets: {
+      english: 'REAL ECONOMY & ALLOCATION',
+      title: '以长期视野，审视产业价值。',
+      text: '围绕企业自有资金投资、房地产投资与投资咨询，关注实体经营和资产配置的协同，重视专业研究与稳健运营。',
+      tags: ['企业自有资金投资', '房地产投资', '投资咨询'],
+    },
+    culture: {
+      english: 'CULTURE & PROFESSIONAL SERVICES',
+      title: '让专业成为协同的支点。',
+      text: '关注艺术品进出口、版权与专利服务、法律咨询和法律文书代理，以专业服务连接文化创新与企业发展。',
+      tags: ['文化与艺术', '知识产权服务', '专业咨询'],
     },
   }
-  const tabs = [...document.querySelectorAll('.scene-tab')]
-  const panel = document.getElementById('scene-panel')
-  function setScene(key, announce = true) {
-    if (!Object.hasOwn(scenes, key)) return
+  const tabs = [...document.querySelectorAll('.portfolio-tab')]
+  function selectSector(key) {
+    if (!Object.hasOwn(sectors, key)) return
+    const sector = sectors[key],
+      index = tabs.findIndex((tab) => tab.dataset.sector === key)
     tabs.forEach((tab) => {
-      const selected = tab.dataset.scene === key
+      const selected = tab.dataset.sector === key
       tab.classList.toggle('active', selected)
       tab.setAttribute('aria-selected', String(selected))
       tab.tabIndex = selected ? 0 : -1
     })
-    panel.setAttribute('aria-labelledby', `tab-${key}`)
-    document.getElementById('scene-content').innerHTML = scenes[key].content
-    if (announce) announcement.textContent = `已切换到${scenes[key].title}功能示意。`
+    document.getElementById('sector-panel').setAttribute('aria-labelledby', `tab-${key}`)
+    document.querySelector('.sector-visual').dataset.sector = key
+    document.querySelector('.sector-visual-label').textContent = sector.english
+    document.querySelector('.sector-serial').textContent = `0${index + 1} / 06`
+    const copy = document.getElementById('sector-copy')
+    copy.querySelector('.eyebrow').textContent = sector.english
+    copy.querySelector('h3').textContent = sector.title
+    copy.querySelector('p:not(.eyebrow)').textContent = sector.text
+    copy.querySelector('.sector-tags').replaceChildren(
+      ...sector.tags.map((tag) => {
+        const node = document.createElement('span')
+        node.textContent = tag
+        return node
+      }),
+    )
   }
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => setScene(tab.dataset.scene))
+    tab.addEventListener('click', () => selectSector(tab.dataset.sector))
     tab.addEventListener('keydown', (event) => {
       let next
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') next = (index + 1) % tabs.length
-      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft')
+      if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % tabs.length
+      if (['ArrowUp', 'ArrowLeft'].includes(event.key))
         next = (index + tabs.length - 1) % tabs.length
       if (event.key === 'Home') next = 0
       if (event.key === 'End') next = tabs.length - 1
       if (next !== undefined) {
         event.preventDefault()
-        setScene(tabs[next].dataset.scene)
+        selectSector(tabs[next].dataset.sector)
         tabs[next].focus()
       }
     })
   })
-  const orientation = window.matchMedia('(max-width: 640px)')
-  const setOrientation = () =>
-    document
-      .querySelector('.scene-tabs')
-      .setAttribute('aria-orientation', orientation.matches ? 'horizontal' : 'vertical')
-  orientation.addEventListener('change', setOrientation)
-  setOrientation()
-  document.querySelectorAll('.faq-list details').forEach((details) => {
-    details.addEventListener('toggle', () => {
-      if (details.open)
-        document.querySelectorAll('.faq-list details').forEach((other) => {
-          if (other !== details) other.open = false
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        menu.querySelectorAll('a').forEach((link) => {
+          if (link.hash === `#${visible.target.id}`) link.setAttribute('aria-current', 'location')
+          else link.removeAttribute('aria-current')
         })
-    })
-  })
-  setScene('shopping', false)
+      },
+      { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.1, 0.3] },
+    )
+    ;['about', 'portfolio', 'innovation', 'responsibility', 'leadership'].forEach((id) =>
+      observer.observe(document.getElementById(id)),
+    )
+  }
+  updateLayout()
 })()
