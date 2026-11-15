@@ -42,11 +42,28 @@ const rendered = sections
         escape(section.marker),
         `<h2 id="${section.id}-title" class="verbatim-heading">${escape(section.marker)}</h2>`,
       )
-    if (section.id === 'culture')
+    if (section.id === 'culture') {
+      copy = copy.replace(
+        /(^|\n)(火炎焱(?:纲领|精神|风格|导训|宣言)：)([^\n]+)/g,
+        (_, prefix, label, value) => {
+          const phrases = value.match(/[^，、。！]+[，、。！]?/g) || []
+          assert.equal(phrases.join(''), value, `词组排版不得改变原文：${label}`)
+          const lines = []
+          for (let i = 0; i < phrases.length; i += 2) {
+            const pair = phrases
+              .slice(i, i + 2)
+              .map((phrase) => `<span class="verbatim-phrase">${phrase}</span>`)
+              .join('')
+            lines.push(`<span class="verbatim-pair-line">${pair}</span>`)
+          }
+          return `${prefix}<span class="verbatim-paired"><strong class="verbatim-term">${label}</strong><span class="verbatim-pair-lines">${lines.join('')}</span></span>`
+        },
+      )
       copy = copy.replace(
         /(^|\n)(火炎焱[^：\n]*：|核心价值观：)/g,
         '$1<strong class="verbatim-term">$2</strong>',
       )
+    }
     copy = copy.replaceAll('♦', '<span class="verbatim-diamond">♦</span>')
     const title = section.heading
       ? `<h2 id="${section.id}-title" class="verbatim-heading">${section.heading}</h2>`

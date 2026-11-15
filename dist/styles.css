@@ -12,6 +12,21 @@
 .verbatim-diamond {
   color: #e02f2f;
 }
+
+.verbatim-paired,
+.verbatim-paired > .verbatim-term,
+.verbatim-pair-lines {
+  display: block;
+}
+
+.verbatim-pair-line {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.verbatim-phrase {
+  white-space: nowrap;
+}
 * {
   box-sizing: border-box;
 }
