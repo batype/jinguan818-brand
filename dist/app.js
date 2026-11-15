@@ -27,29 +27,51 @@
     if (!mobile.matches) closeMenu()
   }
   mobile.addEventListener('change', updateLayout)
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (!visible) return
-        menu.querySelectorAll('a').forEach((link) => {
-          if (link.hash === `#${visible.target.id === 'charity' ? 'care' : visible.target.id}`)
-            link.setAttribute('aria-current', 'location')
-          else link.removeAttribute('aria-current')
-        })
-      },
-      { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.1, 0.3] },
-    )
-    ;['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'updates', 'message'].forEach(
-      (id) => observer.observe(document.getElementById(id)),
-    )
-  }
+  initSectionNavigation()
   updateLayout()
   initRecommendationGallery()
   initUpdateVideos()
   initMotion()
+  function initSectionNavigation() {
+    const links = [...menu.querySelectorAll('a')]
+    const header = document.querySelector('.site-header')
+    const sections = ['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'updates', 'message']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+    let frame = 0
+    let currentId = null
+    const update = () => {
+      frame = 0
+      // 按导航栏下方的阅读位置确定栏目，不依赖长图区块的可见比例。
+      const readingLine = Math.min(header.getBoundingClientRect().bottom + 32, innerHeight - 1)
+      let activeId = ''
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top > readingLine) break
+        activeId = section.id === 'charity' ? 'care' : section.id
+      }
+      if (activeId === currentId) return
+      currentId = activeId
+      links.forEach((link) => {
+        if (link.hash === `#${activeId}`) link.setAttribute('aria-current', 'location')
+        else link.removeAttribute('aria-current')
+      })
+    }
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate, { passive: true })
+    window.addEventListener('hashchange', scheduleUpdate)
+    window.addEventListener('pageshow', scheduleUpdate)
+    window.addEventListener('load', scheduleUpdate, { once: true })
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(scheduleUpdate)
+      observer.observe(document.querySelector('main'))
+      observer.observe(header)
+    }
+    document.fonts?.ready.then(scheduleUpdate)
+    scheduleUpdate()
+  }
   function initUpdateVideos() {
     const videos = [...document.querySelectorAll('.update-player video')]
     videos.forEach((video) => {
