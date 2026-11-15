@@ -19,8 +19,8 @@ export function renderRecommendations(root) {
     <aside class="verbatim-index" aria-hidden="true"><span>08</span><i></i><span>最新推荐</span></aside>
     <div class="verbatim-article recommendations-article">
       <div class="recommendations-heading"><p>SELECTED MATERIALS</p><h2 class="verbatim-heading" id="recommendations-title">最新推荐</h2></div>
-      <aside class="recommendation-context" aria-label="资料说明"><strong>资料说明</strong><p>以下文案与图片为提供方宣传资料，按原文展示，其中功效表述未经本站独立核验。保健食品不是药物，不能代替药物治疗疾病。不能依据这些宣传表述认定补硒可以抗癌或治疗慢性病，过量摄入硒可能有害。</p><a href="https://ods.od.nih.gov/factsheets/Selenium-Consumer/" target="_blank" rel="noopener noreferrer">参考：NIH 硒营养资料 ↗</a></aside>
       <blockquote class="recommendation-copy" cite="#recommendation-source"><span class="recommendation-source" id="recommendation-source">提供方宣传文案 · 原文</span><h3>${escape(title)}</h3><ol>${lines.map(line => `<li>${escape(line)}</li>`).join('\n')}</ol></blockquote>
+      <p class="recommendation-note">这些宣传资料不能作为补硒抗癌或治疗疾病的依据；保健食品不能代替药物，过量补硒可能有害。<a href="https://ods.od.nih.gov/factsheets/Selenium-Consumer/" target="_blank" rel="noopener noreferrer">营养参考 ↗</a></p>
       <div class="recommendation-gallery-heading"><h3>图文资料</h3><p>共 8 张 · 按提供顺序展示</p></div>
       <div class="recommendation-gallery">${gallery}</div>
     </div>
