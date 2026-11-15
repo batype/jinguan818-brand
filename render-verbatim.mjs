@@ -17,10 +17,10 @@ const sections = [
   { id: 'leadership', label: '领导致辞', marker: '【领导致辞】', theme: 'dark' },
   {
     id: 'culture',
-    label: '火炎焱文化',
+    label: '火炎焱纲领',
     marker: '火炎焱方向：',
     theme: 'paper',
-    heading: '火炎焱文化',
+    heading: '火炎焱纲领',
   },
   { id: 'message', label: '寄语', marker: '【寄语】', theme: 'dark' },
 ]

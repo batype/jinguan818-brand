@@ -10,9 +10,12 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
 const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8')
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8')
 const raw = fs.readFileSync(path.join(project, 'content/company-profile.txt'), 'utf8')
-// 此指纹对应用户本次消息原文；修改原文须取得新的逐字文本，不能通过改断言绕过。
+// 2026-11-15 用户授权：仅将栏目条目“火炎焱文化：”改为“火炎焱纲领：”。
+// 反向还原该处后仍须匹配原始指纹，保护其余每个字符。
+assert.equal(raw.split('火炎焱纲领：').length - 1, 1)
+const original = raw.replace('火炎焱纲领：', '火炎焱文化：')
 assert.equal(
-  crypto.createHash('sha256').update(raw).digest('hex'),
+  crypto.createHash('sha256').update(original).digest('hex'),
   '8e1a11fa89c6742fe49cdddfd4d4e854a3f597b2e9c6404619c1d6febbdf18d8',
   '保存的公司原文发生变化',
 )
@@ -60,7 +63,7 @@ for (const label of [
   '公益',
   '荣誉',
   '领导致辞',
-  '火炎焱文化',
+  '火炎焱纲领',
   '寄语',
 ])
   assert(html.includes(label), `原文板块缺失：${label}`)
