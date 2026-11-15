@@ -35,6 +35,22 @@ const decode = (text) =>
     .replaceAll('&gt;', '>')
     .replaceAll('&amp;', '&')
 assert.equal(blocks.map((block) => decode(block[2])).join(''), raw, '网站文字与用户原文不一致')
+const recommendation = fs.readFileSync(path.join(project, 'content/latest-recommendation.txt'), 'utf8').trimEnd()
+const suppliedCopy = html.match(/<blockquote class="recommendation-copy"[\s\S]*?<h3>(.*?)<\/h3><ol>([\s\S]*?)<\/ol><\/blockquote>/)
+assert(suppliedCopy, '推荐原文缺失')
+const recommendationItems = [...suppliedCopy[2].matchAll(/<li>(.*?)<\/li>/g)]
+assert.equal(recommendationItems.length, 10)
+assert.equal(decode(suppliedCopy[1]) + '\n\n' + recommendationItems.map(item => decode(item[1])).join('\n'), recommendation, '推荐文案与提供方原文不一致')
+assert(html.indexOf('id="culture"') < html.indexOf('id="recommendations"'))
+assert(html.indexOf('id="recommendations"') < html.indexOf('id="message"'))
+const gallery = [...html.matchAll(/class="recommendation-image-link" href="([^"]+)" data-gallery-index="(\d+)"/g)]
+const recommendationImages = JSON.parse(fs.readFileSync(path.join(project, 'content/recommendation-images.json'), 'utf8'))
+assert.equal(gallery.length, 8)
+gallery.forEach((item, index) => {
+  assert.equal(item[2], String(index))
+  assert.equal(item[1], `assets/recommendations/${recommendationImages[index].file}`)
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, item[1]))).digest('hex'), recommendationImages[index].sha256, '提供方原图发生变化')
+})
 new vm.Script(js)
 new vm.Script(fs.readFileSync(path.join(root, 'sculpture.js'), 'utf8'))
 assert(html.includes('<html lang="zh-CN">'))

@@ -42,12 +42,69 @@
       },
       { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.1, 0.3] },
     )
-    ;['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'message'].forEach(
+    ;['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'message'].forEach(
       (id) => observer.observe(document.getElementById(id)),
     )
   }
   updateLayout()
+  initRecommendationGallery()
   initMotion()
+  function initRecommendationGallery() {
+    const viewer = document.querySelector('.recommendation-viewer')
+    if (!viewer || typeof viewer.showModal !== 'function') return
+    const links = [...document.querySelectorAll('[data-gallery-index]')]
+    const image = viewer.querySelector('img')
+    const title = viewer.querySelector('h3')
+    const counter = viewer.querySelector('[data-gallery-count]')
+    const closeButton = viewer.querySelector('[data-gallery-close]')
+    const previous = viewer.querySelector('[data-gallery-prev]')
+    const next = viewer.querySelector('[data-gallery-next]')
+    let current = 0
+    let opener
+    let previousOverflow = ''
+    const showImage = (index) => {
+      current = index
+      const source = links[current].querySelector('img')
+      image.src = source.currentSrc || source.src
+      image.alt = source.alt
+      title.textContent = source.alt
+      counter.textContent = `${current + 1} / ${links.length}`
+      previous.disabled = current === 0
+      next.disabled = current === links.length - 1
+      viewer.querySelector('.recommendation-viewer-body').scrollTop = 0
+    }
+    const move = (step) => {
+      const index = current + step
+      if (index >= 0 && index < links.length) showImage(index)
+    }
+    links.forEach((link, index) => link.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
+      event.preventDefault()
+      opener = link
+      showImage(index)
+      previousOverflow = document.documentElement.style.overflow
+      viewer.showModal()
+      document.documentElement.style.overflow = 'hidden'
+      closeButton.focus()
+    }))
+    closeButton.addEventListener('click', () => viewer.close())
+    viewer.addEventListener('click', (event) => {
+      const bounds = viewer.getBoundingClientRect()
+      if (event.target === viewer && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) viewer.close()
+    })
+    viewer.addEventListener('close', () => {
+      document.documentElement.style.overflow = previousOverflow
+      opener?.focus({ preventScroll: true })
+    })
+    previous.addEventListener('click', () => move(-1))
+    next.addEventListener('click', () => move(1))
+    viewer.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault()
+        move(event.key === 'ArrowLeft' ? -1 : 1)
+      }
+    })
+  }
   function initMotion() {
     const toggle = document.querySelector('.motion-toggle')
     let paused = reducedMotion.matches
@@ -71,7 +128,8 @@
     })
     applyMotion()
 
-    const elements = [...document.querySelectorAll('.verbatim-index, .verbatim-article')]
+    // 长图栏目逐项进入视口；整个长栏目可能永远达不到整块的显示比例阈值。
+    const elements = [...document.querySelectorAll('.verbatim-index, .verbatim-article:not(.recommendations-article), .recommendations-heading, .recommendation-copy, .recommendation-image')]
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(
         (entries) => {

@@ -1,3 +1,4 @@
 # 保留用户原文与生成 HTML 的原始换行，不进行 checkout 换行转换。
 content/company-profile.txt -text
+content/latest-recommendation.txt -text
 dist/index.html -text

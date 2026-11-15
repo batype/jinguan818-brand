@@ -1,0 +1,58 @@
+[
+  {
+    "file": "selenium-01.jpg",
+    "title": "产品包装资料",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "a6e7fb9fe7ea3ec7b5820922a27723ca3eded8c59e2a0032ce0dcfea72704696"
+  },
+  {
+    "file": "selenium-02.jpg",
+    "title": "产品宣传资料",
+    "width": 750,
+    "height": 1000,
+    "sha256": "9526c86e4ccb9612ac6da2ca00951d74b6cb15536a11e62c239806bfe71b02af"
+  },
+  {
+    "file": "selenium-03.jpg",
+    "title": "硒分类与技术资料",
+    "width": 4138,
+    "height": 5850,
+    "sha256": "c17c17d917483adb713d900de3cba70ab84a3d6d7f3d5422baf244c3655aa227"
+  },
+  {
+    "file": "selenium-04.jpg",
+    "title": "硒源转化资料",
+    "width": 4138,
+    "height": 5850,
+    "sha256": "c31b59e6bd8887a833d9b08329ced520390f1676736907bf02d329b0f0d4b0d5"
+  },
+  {
+    "file": "selenium-05.jpg",
+    "title": "富硒地区资料",
+    "width": 4138,
+    "height": 5850,
+    "sha256": "2642755de70c35cf2a2aeaeb8a9dc6995a4c5e28c6399caaf1964fc47a43924d"
+  },
+  {
+    "file": "selenium-06.jpg",
+    "title": "硒与健康宣传资料",
+    "width": 1280,
+    "height": 1810,
+    "sha256": "21168e54f21229439c510182e1710a59e3166d26fe3225d1127c383d8303e316"
+  },
+  {
+    "file": "selenium-07.jpg",
+    "title": "产品规格资料",
+    "width": 1162,
+    "height": 1162,
+    "sha256": "7f9b3029b0331d7bd873dcb8a95a82c7076f42704570f3bb0ad56b9ec5a232eb"
+  },
+  {
+    "file": "selenium-08.jpg",
+    "title": "产品介绍资料",
+    "width": 1440,
+    "height": 2759,
+    "sha256": "aac146d7364d9e15e31c4981093f244e6f4a5d3bfe0ad29f49c5368418622c66"
+  }
+]

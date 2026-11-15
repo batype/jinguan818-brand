@@ -31,6 +31,14 @@ node verify.mjs
 
 `dist/index.html` 和原文文件已排除自动格式化，并禁用 Git 换行转换。未来如用户提供新版本原文，应同时更新源文件与对应指纹，不得只调整校验值绕过差异。
 
+## 最新推荐
+
+“最新推荐”位于“火炎焱纲领”和“寄语”之间；导航可直接定位。`content/latest-recommendation.txt` 保留提供方的十条宣传文案，`content/recommendation-images.json` 保存八张图片的顺序、尺寸与 SHA-256。`render-recommendations.mjs` 随正文生成器一起执行。
+
+八张原图存于 `dist/assets/recommendations/`，未重绘或裁切。电脑双列、手机单列，延迟加载图片；支持点击预览、上一张/下一张、方向键、Escape/关闭按钮/遮罩关闭，以及关闭后恢复焦点与页面滚动。无脚本时图片链接仍可直接打开原图。
+
+文案与图片明确标为提供方宣传资料，前置保健食品说明和 NIH 硒营养资料链接，避免将未经核验的疾病功效表述作为医学结论。该引用不代表 NIH 为产品背书。
+
 ## 本地预览
 
 `python3 -m http.server 5191 --bind 127.0.0.1 --directory dist`，访问 `http://127.0.0.1:5191`。无运行时依赖，无个人信息收集表单。
