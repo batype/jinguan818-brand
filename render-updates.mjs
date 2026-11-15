@@ -8,7 +8,7 @@ export function renderUpdates(root) {
     <div class="update-card-meta"><span>${String(index + 1).padStart(2, '0')} / 公开资讯</span><time datetime="${item.date}">${item.date.replaceAll('-', '.')}</time></div>
     <h3 id="${item.id}-title">${escape(item.title)}</h3>
     <p class="update-description">${escape(item.description)}</p>
-    <div class="update-player"><video controls playsinline webkit-playsinline preload="none" controlslist="nodownload" poster="assets/updates/${item.poster}" width="${item.width}" height="${item.height}" aria-label="${escape(item.title)}视频"><source src="assets/updates/${item.video}" type="video/mp4">当前浏览器不支持视频播放，请使用支持 MP4 的浏览器观看。</video></div>
+    <div class="update-player"><video controls playsinline webkit-playsinline preload="none" controlslist="nodownload" poster="assets/updates/${item.poster}" width="${item.width}" height="${item.height}" aria-label="${escape(item.title)}视频"><source src="assets/updates/${item.video}" type="video/mp4">当前浏览器不支持视频播放，请使用支持 MP4 的浏览器观看。</video><button type="button" class="update-play-cover" aria-label="播放：${escape(item.title)}" hidden><img src="assets/updates/${item.poster}" alt="" width="${item.width}" height="${item.height}" loading="lazy"><span class="update-play-badge"><span aria-hidden="true">▶</span><span class="update-play-label">播放视频</span></span></button></div>
     <div class="update-video-meta"><span>视频资料 · ${item.duration}</span><span>支持全屏观看</span></div>
     <a class="update-source" href="${escape(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escape(item.sourceLabel)} <span aria-hidden="true">↗</span></a>
   </article>`).join('\n')

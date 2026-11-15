@@ -52,11 +52,26 @@
   initMotion()
   function initUpdateVideos() {
     const videos = [...document.querySelectorAll('.update-player video')]
-    videos.forEach((video) => video.addEventListener('play', () => {
-      videos.forEach((other) => {
-        if (other !== video && !other.paused) other.pause()
+    videos.forEach((video) => {
+      const cover = video.parentElement.querySelector('.update-play-cover')
+      const showRetry = () => {
+        cover.hidden = false
+        cover.querySelector('.update-play-label').textContent = '重试播放'
+      }
+      cover.hidden = false
+      cover.addEventListener('click', () => {
+        if (video.error) video.load()
+        cover.hidden = true
+        video.play().catch(showRetry)
       })
-    }))
+      video.addEventListener('error', showRetry)
+      video.addEventListener('play', () => {
+        cover.hidden = true
+        videos.forEach((other) => {
+          if (other !== video && !other.paused) other.pause()
+        })
+      })
+    })
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) videos.forEach((video) => video.pause())
     })
