@@ -8,6 +8,10 @@
   --accent: #fc653c;
   --silver: #ded8cc;
 }
+
+.verbatim-diamond {
+  color: #e02f2f;
+}
 * {
   box-sizing: border-box;
 }

@@ -47,6 +47,7 @@ const rendered = sections
         /(^|\n)(火炎焱[^：\n]*：|核心价值观：)/g,
         '$1<strong class="verbatim-term">$2</strong>',
       )
+    copy = copy.replaceAll('♦', '<span class="verbatim-diamond">♦</span>')
     const title = section.heading
       ? `<h2 id="${section.id}-title" class="verbatim-heading">${section.heading}</h2>`
       : ''
