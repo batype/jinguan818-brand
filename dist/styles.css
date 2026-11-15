@@ -15,7 +15,10 @@
 
 .verbatim-paired,
 .verbatim-paired > .verbatim-term,
-.verbatim-pair-lines {
+.verbatim-pair-lines,
+.verbatim-entry,
+.verbatim-entry > .verbatim-term,
+.verbatim-prose {
   display: block;
 }
 
@@ -26,6 +29,12 @@
 
 .verbatim-phrase {
   white-space: nowrap;
+}
+
+.verbatim-clause {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
 }
 * {
   box-sizing: border-box;

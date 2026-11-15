@@ -43,25 +43,45 @@ const rendered = sections
         `<h2 id="${section.id}-title" class="verbatim-heading">${escape(section.marker)}</h2>`,
       )
     if (section.id === 'culture') {
+      const renderProse = (value) => {
+        const clauses = value.match(/[^，、。！]+[，、。！]?/g) || []
+        assert.equal(clauses.join(''), value, '说明文字排版不得改变原文')
+        return `<span class="verbatim-prose">${clauses
+          .map((clause) => `<span class="verbatim-clause">${clause}</span>`)
+          .join('')}</span>`
+      }
+      const renderPairs = (value, pattern = /[^，、。！]+[，、。！]?/g) => {
+        const phrases = value.match(pattern) || []
+        assert.equal(phrases.join(''), value, '词组排版不得改变原文')
+        const lines = []
+        for (let i = 0; i < phrases.length; i += 2) {
+          const pair = phrases
+            .slice(i, i + 2)
+            .map((phrase) => `<span class="verbatim-phrase">${phrase}</span>`)
+            .join('')
+          lines.push(`<span class="verbatim-pair-line">${pair}</span>`)
+        }
+        return `<span class="verbatim-pair-lines">${lines.join('')}</span>`
+      }
       copy = copy.replace(
-        /(^|\n)(火炎焱(?:纲领|精神|风格|导训|宣言)：)([^\n]+)/g,
+        /(^|\n)(火炎焱[^：\n]*：|核心价值观：)([^\n]+)/g,
         (_, prefix, label, value) => {
-          const phrases = value.match(/[^，、。！]+[，、。！]?/g) || []
-          assert.equal(phrases.join(''), value, `词组排版不得改变原文：${label}`)
-          const lines = []
-          for (let i = 0; i < phrases.length; i += 2) {
-            const pair = phrases
-              .slice(i, i + 2)
-              .map((phrase) => `<span class="verbatim-phrase">${phrase}</span>`)
-              .join('')
-            lines.push(`<span class="verbatim-pair-line">${pair}</span>`)
+          let content
+          let paired = true
+          if (label === '火炎焱方向：') {
+            content = renderPairs(value, /\s*♦[^♦]+/g)
+          } else if (label === '核心价值观：') {
+            const end = value.indexOf('。') + 1
+            assert(end > 0, '核心价值观首句边界缺失')
+            content = renderPairs(value.slice(0, end)) + renderProse(value.slice(end))
+          } else if (/火炎焱(?:纲领|精神|风格|导训|宣言|使命)：/.test(label)) {
+            content = renderPairs(value)
+          } else {
+            paired = false
+            content = renderProse(value)
           }
-          return `${prefix}<span class="verbatim-paired"><strong class="verbatim-term">${label}</strong><span class="verbatim-pair-lines">${lines.join('')}</span></span>`
+          return `${prefix}<span class="verbatim-entry${paired ? ' verbatim-paired' : ''}"><strong class="verbatim-term">${label}</strong>${content}</span>`
         },
-      )
-      copy = copy.replace(
-        /(^|\n)(火炎焱[^：\n]*：|核心价值观：)/g,
-        '$1<strong class="verbatim-term">$2</strong>',
       )
     }
     copy = copy.replaceAll('♦', '<span class="verbatim-diamond">♦</span>')
