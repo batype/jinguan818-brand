@@ -3,6 +3,7 @@ import path from 'node:path'
 import assert from 'node:assert/strict'
 import { fileURLToPath } from 'node:url'
 import { renderRecommendations } from './render-recommendations.mjs'
+import { renderUpdates } from './render-updates.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 const source = fs.readFileSync(path.join(root, 'content/company-profile.txt'), 'utf8')
@@ -98,14 +99,14 @@ const rendered = sections
     }" aria-labelledby="${
       section.id
     }-title"><div class="shell"><div class="verbatim-layout"><aside class="verbatim-index" aria-hidden="true"><span>${String(
-      index + 1 + (section.id === 'message' ? 1 : 0),
+      index + 1 + (section.id === 'message' ? 2 : 0),
     ).padStart(2, '0')}</span><i></i><span>${
       section.label
     }</span></aside><div class="verbatim-article">${title}<div class="verbatim-copy" data-source-block="${index}" data-source-start="${
       offsets[index]
     }" data-source-end="${
       offsets[index + 1] ?? source.length
-    }">${copy}</div></div></div></div></section>${city}${section.id === 'culture' ? renderRecommendations(root) : ''}`
+    }">${copy}</div></div></div></div></section>${city}${section.id === 'culture' ? renderRecommendations(root) + renderUpdates(root) : ''}`
   })
   .join('\n')
 assert.equal(rebuilt, source, '原文切分后内容发生变化')

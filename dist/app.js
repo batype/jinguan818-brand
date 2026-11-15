@@ -42,13 +42,25 @@
       },
       { rootMargin: '-15% 0px -50% 0px', threshold: [0, 0.1, 0.3] },
     )
-    ;['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'message'].forEach(
+    ;['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'updates', 'message'].forEach(
       (id) => observer.observe(document.getElementById(id)),
     )
   }
   updateLayout()
   initRecommendationGallery()
+  initUpdateVideos()
   initMotion()
+  function initUpdateVideos() {
+    const videos = [...document.querySelectorAll('.update-player video')]
+    videos.forEach((video) => video.addEventListener('play', () => {
+      videos.forEach((other) => {
+        if (other !== video && !other.paused) other.pause()
+      })
+    }))
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) videos.forEach((video) => video.pause())
+    })
+  }
   function initRecommendationGallery() {
     const viewer = document.querySelector('.recommendation-viewer')
     if (!viewer || typeof viewer.showModal !== 'function') return
@@ -129,7 +141,7 @@
     applyMotion()
 
     // 长图栏目逐项进入视口；整个长栏目可能永远达不到整块的显示比例阈值。
-    const elements = [...document.querySelectorAll('.verbatim-index, .verbatim-article:not(.recommendations-article), .recommendations-heading, .recommendation-copy, .recommendation-image')]
+    const elements = [...document.querySelectorAll('.verbatim-index, .verbatim-article:not(.recommendations-article):not(.updates-article), .recommendations-heading, .recommendation-copy, .recommendation-image, .updates-heading, .update-card')]
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver(
         (entries) => {

@@ -43,6 +43,18 @@ assert.equal(recommendationItems.length, 10)
 assert.equal(decode(suppliedCopy[1]) + '\n\n' + recommendationItems.map(item => decode(item[1])).join('\n'), recommendation, '推荐文案与提供方原文不一致')
 assert(html.indexOf('id="culture"') < html.indexOf('id="recommendations"'))
 assert(html.indexOf('id="recommendations"') < html.indexOf('id="message"'))
+assert(html.indexOf('id="recommendations"') < html.indexOf('id="updates"'))
+assert(html.indexOf('id="updates"') < html.indexOf('id="message"'))
+const updates = JSON.parse(fs.readFileSync(path.join(project, 'content/latest-updates.json'), 'utf8'))
+const updateDescriptions = [...html.matchAll(/<p class="update-description">(.*?)<\/p>/g)]
+assert.equal(updateDescriptions.length, 2, '最新动态应包含两条资讯')
+assert.equal([...html.matchAll(/<video controls playsinline webkit-playsinline preload="none"/g)].length, 2)
+updates.forEach((item, index) => {
+  assert.equal(decode(updateDescriptions[index][1]), item.description, '动态文字或视频顺序发生变化')
+  for (const [file, hash] of [[item.video, item.videoSha256], [item.poster, item.posterSha256]]) {
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/updates', file))).digest('hex'), hash, '动态视频或封面发生变化')
+  }
+})
 const gallery = [...html.matchAll(/class="recommendation-image-link" href="([^"]+)" data-gallery-index="(\d+)"/g)]
 const recommendationImages = JSON.parse(fs.readFileSync(path.join(project, 'content/recommendation-images.json'), 'utf8'))
 assert.equal(gallery.length, 8)
@@ -60,7 +72,8 @@ const surrounding = html.replace(
   /<div class="verbatim-copy" data-source-block="\d+" data-source-start="\d+" data-source-end="\d+">[\s\S]*?<\/div>/g,
   '',
 )
-assert(!/USDT|XRP|XMJ|下载|download|金管818|股权卡包|宝殿轮回/i.test(surrounding + js + css))
+// nodownload 用于禁用视频原生控件的下载项，不属于下载入口。
+assert(!/USDT|XRP|XMJ|下载|download|金管818|股权卡包|宝殿轮回/i.test(surrounding.replaceAll('controlslist="nodownload"', '') + js + css))
 const allIds = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
 const ids = new Set(allIds)
 assert.equal(ids.size, allIds.length, '页面 ID 重复')
@@ -68,7 +81,7 @@ for (const [, fragment] of html.matchAll(/(?:href|aria-controls)="#?([^"]+)"/g))
   if (!fragment.startsWith('assets/') && !fragment.includes('.') && !fragment.includes(':'))
     assert(ids.has(fragment), `锚点缺失：${fragment}`)
 for (const [, file] of html.matchAll(
-  /(?:src|href)="((?:assets\/|styles\.css|app\.js|sculpture\.js)[^"]*)"/g,
+  /(?:src|href|poster)="((?:assets\/|styles\.css|app\.js|sculpture\.js)[^"]*)"/g,
 ))
   assert(fs.existsSync(path.join(root, file)), `资源缺失：${file}`)
 assert(!/<form\b|type="password"|tel:|mailto:/i.test(html))

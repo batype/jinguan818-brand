@@ -1,0 +1,32 @@
+[
+  {
+    "id": "national-health-plan",
+    "title": "国务院印发《国民健康“十五五”规划》",
+    "date": "2026-07-13",
+    "description": "国务院印发《国民健康“十五五”规划》文号国发〔2026〕23号，印发日期2026-07-07，7月13日对外公开发布。",
+    "video": "national-health-plan.mp4",
+    "poster": "national-health-plan.jpg",
+    "width": 720,
+    "height": 1280,
+    "duration": "01:00",
+    "sourceLabel": "中国政府网 · 政策原文",
+    "sourceUrl": "https://www.gov.cn/gongbao/2026/issue_12886/202607/content_7076952.html",
+    "videoSha256": "79cec32644f07064847d3f5a66687e2a14a7f8f7df76bc7dde3df4439293a782",
+    "posterSha256": "d1dff076c6215a48dc618baa6237e2d43782b267840747c4239d630f141e256a"
+  },
+  {
+    "id": "national-health-conference",
+    "title": "全国卫生与健康大会在北京召开",
+    "date": "2026-10-13",
+    "description": "2026年10月12-13日，全国卫生与健康大会在北京召开，习主席出席会议并发表了重要讲话。讲话指出，人民健康是民族昌盛和国家强盛的重要标志。",
+    "video": "national-health-conference.mp4",
+    "poster": "national-health-conference.jpg",
+    "width": 720,
+    "height": 960,
+    "duration": "08:22",
+    "sourceLabel": "新华社 · 中国网信网",
+    "sourceUrl": "https://www.cac.gov.cn/2026-10/13/c_1793641984114975.htm",
+    "videoSha256": "146ef98bf4d2af208d6bf965e773f9954b9e93acbb83caa132e2f9994d54495f",
+    "posterSha256": "eb55e8b9079e4b520cba5879546c35ecf2695486b4e1543a0e0190a0d2fd4654"
+  }
+]

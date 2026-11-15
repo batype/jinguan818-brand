@@ -56,7 +56,7 @@ jobs:
               digest = hashlib.sha256((target / filename).read_bytes()).hexdigest()[:10]
               return f'{match.group("prefix")}{filename}?v={digest}"'
           html = re.sub(
-              r'(?P<prefix>(?:src|href)=")(?P<file>assets/[^"?#]+|styles\.css|app\.js|sculpture\.js)"',
+              r'(?P<prefix>(?:src|href|poster)=")(?P<file>assets/[^"?#]+|styles\.css|app\.js|sculpture\.js)"',
               version_asset,
               html,
           )
