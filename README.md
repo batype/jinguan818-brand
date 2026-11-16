@@ -37,6 +37,8 @@ node verify.mjs
 
 纲领条目间距由样式控制，电脑端 22px、手机端 18px；原文空行保留在文本中但不额外占行。纲领标题在各适配端原字号基础上减小 8px。
 
+寄语结尾“我们一定会做到：”标题完整展示在一行，右侧保留四项承诺，标题列按实际文字宽度占位。
+
 ## 最新推荐
 
 “最新推荐”位于“寄语”之后、“最新动态”之前；导航可直接定位。`content/latest-recommendation.txt` 保留提供方的十条宣传文案，`content/recommendation-images.json` 保存八张图片的顺序、尺寸与 SHA-256。`render-recommendations.mjs` 随正文生成器一起执行。

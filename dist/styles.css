@@ -2668,7 +2668,7 @@ img {
 #culture .verbatim-content, .verbatim-pledge .verbatim-content { display: block; min-width: 0; white-space: normal; overflow-wrap: anywhere; }
 #culture .verbatim-pair-line, .verbatim-pledge .verbatim-pair-line { flex-wrap: wrap; column-gap: .2em; }
 #culture .verbatim-direction .verbatim-pair-line { flex-wrap: nowrap; column-gap: 0; }
-.verbatim-pledge .verbatim-term > span { display: block; }
+.verbatim-pledge .verbatim-term > span { display: inline; }
 .verbatim-pledge .verbatim-pair-line { column-gap: .8em; }
 #culture .verbatim-spirit .verbatim-pair-lines { display: grid; grid-template-columns: repeat(4, max-content); column-gap: .2em; }
 #culture .verbatim-spirit .verbatim-pair-line { display: contents; }
@@ -2680,3 +2680,8 @@ img {
 @media (max-width: 640px) { #culture .verbatim-heading { font-size: 23px; } #culture .verbatim-copy { gap: 18px; } }
 @media (max-width: 360px) { #culture .verbatim-heading { font-size: 20px; } }
 @media (max-width: 360px) { #culture .verbatim-spirit .verbatim-phrase { letter-spacing: -.1px; } }
+.verbatim-pledge { grid-template-columns: max-content minmax(0, 1fr); }
+@media (max-width: 360px) {
+  .verbatim-pledge .verbatim-pair-line { column-gap: 0; }
+  .verbatim-pledge .verbatim-phrase { letter-spacing: -.3px; }
+}
