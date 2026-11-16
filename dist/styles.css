@@ -2658,6 +2658,8 @@ img {
 @media (max-width: 640px) { .update-card h3 { font-size: 22px; } .update-card-meta { margin-bottom: 16px; } .update-description { font-size: 14px; } }
 
 /* 公司全称与纲领按用户确认的层级、左右对齐方式展示。 */
+#culture .verbatim-copy { display: flex; flex-direction: column; gap: 22px; white-space: normal; }
+#culture .verbatim-heading { font-size: clamp(22px, calc(3.6vw - 8px), 44px); }
 .hero-company { font-size: clamp(18px, 1.8vw, 24px); line-height: 1.75; font-weight: 500; letter-spacing: .6px; color: #d4cabc; margin-top: 22px; }
 .verbatim-leadership-motto { display: block; text-align: center; white-space: normal; font-size: clamp(16px, 1.6vw, 22px); color: #e0d6c6; line-height: 1.8; margin-bottom: 18px; }
 .verbatim-source-space { display: none; }
@@ -2673,3 +2675,6 @@ img {
 @media (max-width: 640px) { #culture .verbatim-entry, .verbatim-pledge { grid-template-columns: 90px minmax(0, 1fr); column-gap: 10px; } }
 @media (max-width: 479px) { #culture .verbatim-spirit .verbatim-pair-line { grid-template-columns: repeat(2, max-content); } }
 @media (max-width: 360px) { .hero-company { font-size: 16px; letter-spacing: .3px; } #culture .verbatim-entry, .verbatim-pledge { grid-template-columns: 84px minmax(0, 1fr); } }
+@media (max-width: 820px) { #culture .verbatim-heading { font-size: 26px; } }
+@media (max-width: 640px) { #culture .verbatim-heading { font-size: 23px; } #culture .verbatim-copy { gap: 18px; } }
+@media (max-width: 360px) { #culture .verbatim-heading { font-size: 20px; } }

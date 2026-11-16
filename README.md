@@ -35,6 +35,8 @@ node verify.mjs
 
 火炎焱方向每行三个，共两行；核心价值观不按词组或句子强制换行，右栏全文随屏幕宽度自然折行。
 
+纲领条目间距由样式控制，电脑端 22px、手机端 18px；原文空行保留在文本中但不额外占行。纲领标题在各适配端原字号基础上减小 8px。
+
 ## 最新推荐
 
 “最新推荐”位于“寄语”之后、“最新动态”之前；导航可直接定位。`content/latest-recommendation.txt` 保留提供方的十条宣传文案，`content/recommendation-images.json` 保存八张图片的顺序、尺寸与 SHA-256。`render-recommendations.mjs` 随正文生成器一起执行。
