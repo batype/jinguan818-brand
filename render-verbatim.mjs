@@ -78,7 +78,7 @@ const rendered = sections
           let paired = true
           if (label === '火炎焱方向：') {
             content = renderPairs(value, /\s*♦[^♦]+/g, 3)
-          } else if (label === '核心价值观：' || label === '火炎焱理念：') {
+          } else if (['核心价值观：', '火炎焱理念：', '火炎焱宗旨：'].includes(label)) {
             paired = false
             content = value
           } else if (label === '火炎焱精神：') {
