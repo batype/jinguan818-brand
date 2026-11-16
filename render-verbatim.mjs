@@ -102,7 +102,7 @@ const rendered = sections
         for (let i = 0; i < items.length; i += 2) {
           rows.push(`<span class="verbatim-pair-line">${items.slice(i, i + 2).map(item => `<span class="verbatim-phrase">${item}</span>`).join('')}</span>`)
         }
-        return `${prefix}<span class="verbatim-entry verbatim-pledge"><strong class="verbatim-term"><span>我们一定</span><span>会做到：</span></strong><span class="verbatim-content"><span class="verbatim-pair-lines">${rows.join('')}</span></span></span>`
+        return `${prefix}<span class="verbatim-entry verbatim-pledge"><strong class="verbatim-term"><span>我们一定会做到：</span></strong><span class="verbatim-content"><span class="verbatim-pair-lines">${rows.join('')}</span></span></span>`
       })
     }
     copy = copy.replaceAll('♦', '<span class="verbatim-diamond">♦</span>')
