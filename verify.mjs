@@ -10,10 +10,13 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
 const js = fs.readFileSync(path.join(root, 'app.js'), 'utf8')
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8')
 const raw = fs.readFileSync(path.join(project, 'content/company-profile.txt'), 'utf8')
-// 2026-11-15 用户授权：仅将栏目条目“火炎焱文化：”改为“火炎焱纲领：”。
-// 反向还原该处后仍须匹配原始指纹，保护其余每个字符。
-assert.equal(raw.split('火炎焱纲领：').length - 1, 1)
-const original = raw.replace('火炎焱纲领：', '火炎焱文化：')
+// 逐项反向还原用户明确授权的改词，再对照最初原文指纹保护其余字符。
+const edits = JSON.parse(fs.readFileSync(path.join(project, 'content/company-copy-edits.json'), 'utf8'))
+let original = raw
+for (const edit of [...edits].reverse()) {
+  assert.equal(original.split(edit.to).length - 1, 1, `授权文案出现次数异常：${edit.to}`)
+  original = original.replace(edit.to, edit.from)
+}
 assert.equal(
   crypto.createHash('sha256').update(original).digest('hex'),
   '8e1a11fa89c6742fe49cdddfd4d4e854a3f597b2e9c6404619c1d6febbdf18d8',
@@ -42,9 +45,9 @@ const recommendationItems = [...suppliedCopy[2].matchAll(/<li>(.*?)<\/li>/g)]
 assert.equal(recommendationItems.length, 10)
 assert.equal(decode(suppliedCopy[1]) + '\n\n' + recommendationItems.map(item => decode(item[1])).join('\n'), recommendation, '推荐文案与提供方原文不一致')
 assert(html.indexOf('id="culture"') < html.indexOf('id="recommendations"'))
-assert(html.indexOf('id="recommendations"') < html.indexOf('id="message"'))
+assert(html.indexOf('id="culture"') < html.indexOf('id="message"'))
+assert(html.indexOf('id="message"') < html.indexOf('id="recommendations"'))
 assert(html.indexOf('id="recommendations"') < html.indexOf('id="updates"'))
-assert(html.indexOf('id="updates"') < html.indexOf('id="message"'))
 const updates = JSON.parse(fs.readFileSync(path.join(project, 'content/latest-updates.json'), 'utf8'))
 const updateDescriptions = [...html.matchAll(/<p class="update-description">(.*?)<\/p>/g)]
 assert.equal(updateDescriptions.length, 2, '最新动态应包含两条资讯')

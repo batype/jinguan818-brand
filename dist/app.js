@@ -35,7 +35,7 @@
   function initSectionNavigation() {
     const links = [...menu.querySelectorAll('a')]
     const header = document.querySelector('.site-header')
-    const sections = ['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'recommendations', 'updates', 'message']
+    const sections = ['about', 'services', 'care', 'charity', 'honors', 'leadership', 'culture', 'message', 'recommendations', 'updates']
       .map((id) => document.getElementById(id))
       .filter(Boolean)
     let frame = 0

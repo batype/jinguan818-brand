@@ -16,7 +16,7 @@ export function renderRecommendations(root) {
   }).join('\n')
   return `<section class="recommendations section" id="recommendations" aria-labelledby="recommendations-title">
   <div class="shell"><div class="verbatim-layout">
-    <aside class="verbatim-index" aria-hidden="true"><span>08</span><i></i><span>最新推荐</span></aside>
+    <aside class="verbatim-index" aria-hidden="true"><span>09</span><i></i><span>最新推荐</span></aside>
     <div class="verbatim-article recommendations-article">
       <div class="recommendations-heading"><p>SELECTED MATERIALS</p><h2 class="verbatim-heading" id="recommendations-title">最新推荐</h2></div>
       <blockquote class="recommendation-copy" cite="#recommendation-source"><span class="recommendation-source" id="recommendation-source">提供方宣传文案 · 原文</span><h3>${escape(title)}</h3><ol>${lines.map(line => `<li>${escape(line)}</li>`).join('\n')}</ol></blockquote>

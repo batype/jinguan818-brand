@@ -13,7 +13,7 @@ export function renderUpdates(root) {
     <a class="update-source" href="${escape(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escape(item.sourceLabel)} <span aria-hidden="true">↗</span></a>
   </article>`).join('\n')
   return `<section class="updates section verbatim-paper" id="updates" aria-labelledby="updates-title"><div class="shell"><div class="verbatim-layout">
-    <aside class="verbatim-index" aria-hidden="true"><span>09</span><i></i><span>最新动态</span></aside>
+    <aside class="verbatim-index" aria-hidden="true"><span>10</span><i></i><span>最新动态</span></aside>
     <div class="verbatim-article updates-article"><div class="updates-heading"><p>LATEST UPDATES</p><h2 class="verbatim-heading" id="updates-title">最新动态</h2></div><div class="updates-list">${cards}</div></div>
   </div></div></section>`
 }
