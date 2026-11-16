@@ -52,13 +52,13 @@ const rendered = sections
           .map((clause) => `<span class="verbatim-clause">${clause}</span>`)
           .join('')}</span>`
       }
-      const renderPairs = (value, pattern = /[^，、。！]+[，、。！]?/g) => {
+      const renderPairs = (value, pattern = /[^，、。！]+[，、。！]?/g, phrasesPerLine = 2) => {
         const phrases = value.match(pattern) || []
         assert.equal(phrases.join(''), value, '词组排版不得改变原文')
         const lines = []
-        for (let i = 0; i < phrases.length; i += 2) {
+        for (let i = 0; i < phrases.length; i += phrasesPerLine) {
           const pair = phrases
-            .slice(i, i + 2)
+            .slice(i, i + phrasesPerLine)
             .map((phrase) => `<span class="verbatim-phrase">${phrase}</span>`)
             .join('')
           lines.push(`<span class="verbatim-pair-line">${pair}</span>`)
@@ -76,7 +76,9 @@ const rendered = sections
             const end = value.indexOf('。') + 1
             assert(end > 0, '核心价值观首句边界缺失')
             content = renderPairs(value.slice(0, end)) + renderProse(value.slice(end))
-          } else if (/火炎焱(?:纲领|精神|风格|导训|宣言|使命)：/.test(label)) {
+          } else if (label === '火炎焱精神：') {
+            content = renderPairs(value, undefined, 4)
+          } else if (/火炎焱(?:纲领|风格|导训|宣言|使命)：/.test(label)) {
             content = renderPairs(value)
           } else {
             paired = false
