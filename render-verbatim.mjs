@@ -77,11 +77,10 @@ const rendered = sections
           let content
           let paired = true
           if (label === '火炎焱方向：') {
-            content = renderPairs(value, /\s*♦[^♦]+/g)
+            content = renderPairs(value, /\s*♦[^♦]+/g, 3)
           } else if (label === '核心价值观：') {
-            const end = value.indexOf('。') + 1
-            assert(end > 0, '核心价值观首句边界缺失')
-            content = renderPairs(value.slice(0, end)) + renderProse(value.slice(end))
+            paired = false
+            content = value
           } else if (label === '火炎焱精神：') {
             content = renderPairs(value, undefined, 4)
           } else if (/火炎焱(?:文化|风格|导训|宣言|使命)：/.test(label)) {
@@ -90,7 +89,7 @@ const rendered = sections
             paired = false
             content = renderProse(value)
           }
-          return `${prefix}<span class="verbatim-entry${paired ? ' verbatim-paired' : ''}${label === '火炎焱精神：' ? ' verbatim-spirit' : ''}"><strong class="verbatim-term">${label}</strong><span class="verbatim-content">${content}</span></span>`
+          return `${prefix}<span class="verbatim-entry${paired ? ' verbatim-paired' : ''}${label === '火炎焱精神：' ? ' verbatim-spirit' : ''}${label === '火炎焱方向：' ? ' verbatim-direction' : ''}"><strong class="verbatim-term">${label}</strong><span class="verbatim-content">${content}</span></span>`
         },
       )
     }

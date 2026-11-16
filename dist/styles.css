@@ -2665,6 +2665,7 @@ img {
 #culture .verbatim-term, .verbatim-pledge .verbatim-term { white-space: nowrap; line-height: inherit; }
 #culture .verbatim-content, .verbatim-pledge .verbatim-content { display: block; min-width: 0; white-space: normal; overflow-wrap: anywhere; }
 #culture .verbatim-pair-line, .verbatim-pledge .verbatim-pair-line { flex-wrap: wrap; column-gap: .2em; }
+#culture .verbatim-direction .verbatim-pair-line { flex-wrap: nowrap; column-gap: 0; }
 .verbatim-pledge .verbatim-term > span { display: block; }
 .verbatim-pledge .verbatim-pair-line { column-gap: .8em; }
 #culture .verbatim-spirit .verbatim-pair-line { display: grid; grid-template-columns: repeat(4, max-content); }
