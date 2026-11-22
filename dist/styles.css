@@ -302,7 +302,7 @@ img {
 .hero h1 {
   font-size: clamp(24px, calc(5.6vw - 20px), 64px);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.45;
   letter-spacing: -3px;
   margin: 21px 0 29px;
   white-space: nowrap;
@@ -653,7 +653,7 @@ img {
 .city-copy h2 {
   font-size: clamp(30px, calc(5vw - 20px), 56px);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.5;
   margin: 27px 0 23px;
 }
 .city-copy > p:not(.eyebrow) {
@@ -1954,7 +1954,7 @@ img {
   .hero h1 {
     font-size: 26px;
     letter-spacing: -2px;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 20px 0 20px;
     white-space: normal;
   }
@@ -2117,7 +2117,7 @@ img {
   }
   .city-copy h2 {
     font-size: 23px;
-    line-height: 1.45;
+    line-height: 1.55;
     margin: 24px 0;
   }
   .city-copy .eyebrow {
