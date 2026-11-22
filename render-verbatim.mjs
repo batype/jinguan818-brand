@@ -22,7 +22,7 @@ const sections = [
     label: '火炎焱纲领',
     marker: '火炎焱方向：',
     theme: 'paper',
-    heading: '火炎焱纲领',
+    heading: '【火炎焱纲领】',
   },
   { id: 'message', label: '寄语', marker: '【寄语】', theme: 'dark' },
 ]

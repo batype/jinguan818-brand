@@ -2591,7 +2591,6 @@ img {
 
 /* 最新推荐：提供方文案与图片独立展示，避免影响原有公司原文版式。 */
 .recommendations { background: #191917; color: #e6e0d5; border-top: 1px solid var(--line); }
-.recommendations-heading > p { margin: 0 0 12px; color: var(--accent); font-size: 11px; letter-spacing: 3px; }
 .recommendation-copy { margin: 0 0 24px; }
 .recommendation-source { color: #a49b8b; font-size: 12px; letter-spacing: 1px; }
 .recommendation-copy h3 { margin: 16px 0 24px; font-size: clamp(22px, 2.4vw, 32px); font-weight: 500; line-height: 1.5; }
@@ -2634,7 +2633,6 @@ img {
 
 /* 最新动态：独立资讯卡片，原比例视频，不自动加载或播放。 */
 .updates { border-top: 1px solid #9a816222; }
-.updates-heading > p { margin: 0 0 12px; color: #a04b30; font-size: 11px; letter-spacing: 3px; }
 .updates-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
 .update-card { min-width: 0; border-top: 1px solid #a38c704d; padding-top: 20px; display: flex; flex-direction: column; align-items: stretch; }
 .update-card-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-size: 11px; color: #776954; letter-spacing: .7px; margin-bottom: 22px; }
