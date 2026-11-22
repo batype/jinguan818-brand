@@ -300,7 +300,7 @@ img {
   color: #a8a397;
 }
 .hero h1 {
-  font-size: clamp(44px, 5.6vw, 84px);
+  font-size: clamp(24px, calc(5.6vw - 20px), 64px);
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: -3px;
@@ -651,7 +651,7 @@ img {
   letter-spacing: 3px;
 }
 .city-copy h2 {
-  font-size: clamp(50px, 5vw, 76px);
+  font-size: clamp(30px, calc(5vw - 20px), 56px);
   font-weight: 400;
   line-height: 1.4;
   margin: 27px 0 23px;
@@ -1410,7 +1410,7 @@ img {
     right: -3%;
   }
   .hero h1 {
-    font-size: 86px;
+    font-size: 66px;
   }
 }
 @media (max-width: 1120px) {
@@ -1422,7 +1422,7 @@ img {
     font-size: 12px;
   }
   .hero h1 {
-    font-size: 60px;
+    font-size: 40px;
   }
   .hero-copy > .eyebrow {
     font-size: 9px;
@@ -1543,7 +1543,7 @@ img {
     padding-block: 65px;
   }
   .hero h1 {
-    font-size: 48px;
+    font-size: 28px;
     letter-spacing: -2px;
   }
   .hero-copy > .eyebrow {
@@ -1647,7 +1647,7 @@ img {
     height: 500px;
   }
   .city-copy h2 {
-    font-size: 51px;
+    font-size: 31px;
   }
   .city-copy > p:not(.eyebrow) {
     font-size: 12px;
@@ -1952,7 +1952,7 @@ img {
     margin-top: 20px;
   }
   .hero h1 {
-    font-size: 46px;
+    font-size: 26px;
     letter-spacing: -2px;
     line-height: 1.4;
     margin: 20px 0 20px;
@@ -2116,7 +2116,7 @@ img {
     filter: saturate(0.15) brightness(0.5);
   }
   .city-copy h2 {
-    font-size: 43px;
+    font-size: 23px;
     line-height: 1.45;
     margin: 24px 0;
   }
@@ -2463,7 +2463,7 @@ img {
     padding-inline: 16px;
   }
   .hero h1 {
-    font-size: 39px;
+    font-size: 19px;
     letter-spacing: -2px;
   }
   .hero-description {
@@ -2500,7 +2500,7 @@ img {
     font-size: 30px;
   }
   .city-copy h2 {
-    font-size: 39px;
+    font-size: 19px;
   }
   .city-chapter {
     height: 420px;
