@@ -46,8 +46,8 @@ const rendered = sections
       )
     if (section.id === 'leadership') {
       copy = copy.replace(
-        /^([ \u00a0\u3000]*)(携手共发展，华夏永相伴)([ \u00a0\u3000]*)$/m,
-        (_, before, motto, after) => `<span class="verbatim-leadership-motto"><span class="verbatim-source-space" aria-hidden="true">${before}</span>${motto}<span class="verbatim-source-space" aria-hidden="true">${after}</span></span>`,
+        /^([ \u00a0\u3000]*)(携手共发展，华夏永相伴)([ \u00a0\u3000]*)(\n|$)/m,
+        (_, before, motto, after, newline) => `<span class="verbatim-leadership-motto"><span class="verbatim-source-space" aria-hidden="true">${before}</span>${motto}<span class="verbatim-source-space" aria-hidden="true">${after}${newline}</span></span>`,
       )
     }
     if (section.id === 'culture') {
@@ -106,6 +106,10 @@ const rendered = sections
       })
     }
     copy = copy.replaceAll('♦', '<span class="verbatim-diamond">♦</span>')
+    // 保留原文换行字符，仅隐藏标题后额外生成的空白行，间距统一由样式控制。
+    copy = copy.replace(/(<\/h2>)(\n+)/g, (_, heading, whitespace) =>
+      `${heading}<span class="verbatim-source-space" aria-hidden="true">${whitespace}</span>`,
+    )
     const title = section.heading
       ? `<h2 id="${section.id}-title" class="verbatim-heading">${section.heading}</h2>`
       : ''

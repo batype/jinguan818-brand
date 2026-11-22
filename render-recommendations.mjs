@@ -20,7 +20,6 @@ export function renderRecommendations(root) {
     <div class="verbatim-article recommendations-article">
       <div class="recommendations-heading"><p>SELECTED MATERIALS</p><h2 class="verbatim-heading" id="recommendations-title">最新推荐</h2></div>
       <blockquote class="recommendation-copy" cite="#recommendation-source"><span class="recommendation-source" id="recommendation-source">提供方宣传文案 · 原文</span><h3>${escape(title)}</h3><ol>${lines.map(line => `<li>${escape(line)}</li>`).join('\n')}</ol></blockquote>
-      <p class="recommendation-note">这些宣传资料不能作为补硒抗癌或治疗疾病的依据；保健食品不能代替药物，过量补硒可能有害。<a href="https://ods.od.nih.gov/factsheets/Selenium-Consumer/" target="_blank" rel="noopener noreferrer">营养参考 ↗</a></p>
       <div class="recommendation-gallery-heading"><h3>图文资料</h3><p>共 8 张 · 按提供顺序展示</p></div>
       <div class="recommendation-gallery">${gallery}</div>
     </div>
