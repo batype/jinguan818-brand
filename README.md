@@ -69,3 +69,17 @@ node verify.mjs
 官网地址：`https://batype.github.io/jinguan818-brand/`。
 
 通过 **Actions → Deploy GitHub Pages → Run workflow** 发布。工作流只上传 `dist/`，并为静态资源添加版本标记。此前 Sites 项目身份保留，本次部署目标仍为 GitHub Pages。
+
+## Docker 部署
+
+在服务器克隆本仓库后，从仓库根目录构建并启动容器。镜像通过 Nginx 提供 `dist/` 中的网页、图片和视频。
+
+```bash
+git clone https://github.com/batype/jinguan818-brand.git
+cd jinguan818-brand
+docker build --pull -t jinguan818-brand:latest .
+docker run -d --name jinguan818-brand --restart unless-stopped -p 8080:80 jinguan818-brand:latest
+curl -f http://127.0.0.1:8080/
+```
+
+直接访问时使用服务器 IP 的 8080 端口。如果由同一台服务器上的 Nginx 或 Caddy 提供域名和 HTTPS，把端口映射改为 `-p 127.0.0.1:8080:80`，再将域名反向代理到 `http://127.0.0.1:8080`。

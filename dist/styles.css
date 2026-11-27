@@ -1336,9 +1336,21 @@ img {
   padding-bottom: 22px;
   line-height: 1.9;
 }
-.photo-credit a {
+.photo-credit a,
+.footer-filing {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+.footer-bottom > .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.footer-filing {
+  color: #958b7b;
+  font-size: 11px;
+  white-space: nowrap;
 }
 .js .reveal {
   opacity: 0;
