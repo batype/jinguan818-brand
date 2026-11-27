@@ -61,7 +61,7 @@ node verify.mjs
 
 - `dist/app.js`：移动导航、章节揭示、阅读进度、指针反馈、动效暂停。
 - `dist/sculpture.js`：本地 WebGL 金属雕塑，支持离屏停帧、减少动态效果和 SVG 回退。
-- `dist/assets/guangzhou-skyline.jpg`：jo.sau 拍摄的广州城市实景，不代表公司办公地或资产。来源 [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Guangzhou_skyline.jpg)，[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)，网页以 CSS 作裁切和色调处理。页脚保留署名与许可链接。
+- `dist/assets/guangzhou-skyline.jpg`：jo.sau 拍摄的广州城市实景，不代表公司办公地或资产。来源 [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Guangzhou_skyline.jpg)，[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)，网页以 CSS 作裁切和色调处理。署名与许可链接显示在照片旁。
 
 ## GitHub Pages
 

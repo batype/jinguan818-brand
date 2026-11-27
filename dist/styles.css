@@ -668,6 +668,13 @@ img {
   font-size: 10px;
   color: #a8aaa2;
   letter-spacing: 1px;
+  text-align: right;
+}
+.photo-credit {
+  display: block;
+  color: #c3c3b9;
+  font-size: 11px;
+  letter-spacing: normal;
 }
 .city-shutter {
   position: absolute;
@@ -1330,26 +1337,18 @@ img {
   color: #6b5e4c;
   padding-block: 22px;
 }
-.photo-credit {
-  font-size: 10px;
-  color: #958b7b;
+.footer-registration {
   padding-bottom: 22px;
-  line-height: 1.9;
+  font-size: 11px;
+  text-align: center;
 }
 .photo-credit a,
 .footer-filing {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.footer-bottom > .footer-legal {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 12px;
-}
 .footer-filing {
   color: #958b7b;
-  font-size: 11px;
   white-space: nowrap;
 }
 .js .reveal {
@@ -2458,10 +2457,6 @@ img {
   }
   .footer-bottom > span + span {
     margin-top: 8px;
-  }
-  .photo-credit {
-    font-size: 9px;
-    padding-bottom: 22px;
   }
   .js .reveal {
     transform: translateY(20px);

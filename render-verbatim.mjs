@@ -115,7 +115,7 @@ const rendered = sections
       : ''
     const city =
       index === 0
-        ? `<section class="city-chapter" aria-label="广州城市影像"><div class="city-image" aria-hidden="true"></div><div class="city-copy shell"><p class="eyebrow">火炎焱多元化（广州）投资有限公司</p><h2>和合各方利益，<br>实现多赢共好</h2><span class="city-location">中国 · 广州 / 城市影像</span></div></section>`
+        ? `<section class="city-chapter" aria-label="广州城市影像"><div class="city-image" aria-hidden="true"></div><div class="city-copy shell"><p class="eyebrow">火炎焱多元化（广州）投资有限公司</p><h2>和合各方利益，<br>实现多赢共好</h2><div class="city-location"><span>中国 · 广州 / 城市影像</span><small class="photo-credit"><a href="https://commons.wikimedia.org/wiki/File:Guangzhou_skyline.jpg" target="_blank" rel="noopener noreferrer">jo.sau / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a> · 裁切与调色</small></div></div></section>`
         : ''
     return `<section class="verbatim-section section verbatim-${section.theme}" id="${
       section.id
