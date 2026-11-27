@@ -1,0 +1,36 @@
+name: Trigger Flow release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions: {}
+
+jobs:
+  trigger-flow:
+    if: ${{ !github.event.deleted }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FLOW_RUN_URL: ${{ vars.FLOW_RUN_URL }}
+      FLOW_SOURCE_URL: ${{ vars.FLOW_SOURCE_URL }}
+      FLOW_TOKEN: ${{ secrets.FLOW_TOKEN }}
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - name: Run Flow for the release tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${FLOW_RUN_URL:?请配置 FLOW_RUN_URL}"
+          : "${FLOW_SOURCE_URL:?请配置 FLOW_SOURCE_URL}"
+          : "${FLOW_TOKEN:?请配置 FLOW_TOKEN}"
+
+          payload=$(jq -cn --arg source "$FLOW_SOURCE_URL" --arg tag "$RELEASE_TAG" \
+            '{params: ({runningTags: {($source): $tag}} | tojson)}')
+          result=$(curl --fail --silent --show-error --max-time 30 --proto '=https' \
+            --header 'Content-Type: application/json' \
+            --header "x-yunxiao-token: $FLOW_TOKEN" \
+            --data "$payload" "$FLOW_RUN_URL")
+          run_id=$(jq -er 'select(type == "number" and . > 0)' <<< "$result")
+          printf 'Flow 已启动，标签 %s，运行编号 %s。\n' "$RELEASE_TAG" "$run_id"
