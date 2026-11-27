@@ -57,4 +57,4 @@ fi
 if ! git push --atomic --no-follow-tags -- "$remote" "HEAD:$branch_ref" "$tag_ref:$tag_ref"; then
   fail "推送命令失败，本地保留了提交和标签 ${tag}。请检查远程状态，若标签尚未推送可重跑原命令。"
 fi
-printf '已推送 main 和 %s，请在 GitHub Actions 查看 Flow 触发结果。\n' "$tag"
+printf '已推送 main 分支和版本标签 %s。\n' "$tag"

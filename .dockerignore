@@ -1,3 +1,5 @@
 *
 !dist/
 !dist/**
+!nginx/
+!nginx/website-10007.conf
